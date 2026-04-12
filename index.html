@@ -415,15 +415,28 @@ const BOOKED_DEFAULTS = [
   'Les 2 Chalets Alpins & Bains Nordiques',
 ];
 
+// Store both the booked set AND which defaults have been seen, so new
+// entries added to BOOKED_DEFAULTS are applied to returning visitors too.
+// Users can still manually un-gray a property (toggle off), and that choice
+// is preserved even when defaults update.
+const BOOKED_SEEN_KEY = 'tripplan_booked_seen_v2';
+
 function loadBooked() {
   try {
-    const stored = localStorage.getItem(BOOKED_KEY);
-    if (stored !== null) return new Set(JSON.parse(stored));
-    // First run: seed with known-unavailable properties
-    const defaults = new Set(BOOKED_DEFAULTS);
-    localStorage.setItem(BOOKED_KEY, JSON.stringify([...defaults]));
-    return defaults;
-  } catch { return new Set(); }
+    const stored  = localStorage.getItem(BOOKED_KEY);
+    const seenRaw = localStorage.getItem(BOOKED_SEEN_KEY);
+    const seen    = new Set(seenRaw ? JSON.parse(seenRaw) : []);
+    const booked  = new Set(stored  ? JSON.parse(stored)  : []);
+
+    // Find defaults not yet applied to this browser
+    const newDefaults = BOOKED_DEFAULTS.filter(d => !seen.has(d));
+    if (newDefaults.length > 0) {
+      newDefaults.forEach(d => { booked.add(d); seen.add(d); });
+      localStorage.setItem(BOOKED_KEY,      JSON.stringify([...booked]));
+      localStorage.setItem(BOOKED_SEEN_KEY, JSON.stringify([...seen]));
+    }
+    return booked;
+  } catch { return new Set(BOOKED_DEFAULTS); }
 }
 function toggleBooked(accName) {
   const b = loadBooked();
