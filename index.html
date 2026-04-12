@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hemelvaartsweekend 2026 — Trip Planner</title>
+<style>
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --surface2: #1e2533;
+  --border: #2a3245;
+  --border2: #374160;
+  --text: #e2e8f0;
+  --muted: #7c8db0;
+  --accent: #818cf8;
+  --green: #34d399;
+  --yellow: #fbbf24;
+  --orange: #fb923c;
+  --red: #f87171;
+  --blue: #60a5fa;
+  --cyan: #22d3ee;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, sans-serif; font-size: 13px; line-height: 1.5; }
+
+/* ── Load screen ─────────────────────────────────────── */
+#load-screen {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-height: 100vh; gap: 16px; text-align: center; padding: 24px;
+}
+#load-screen h1 { font-size: 28px; font-weight: 700; color: var(--text); }
+#load-screen p { color: var(--muted); max-width: 380px; }
+#load-screen code { background: var(--surface2); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 12px; color: var(--cyan); }
+.btn-primary {
+  background: var(--accent); color: #fff; border: none; border-radius: 8px;
+  padding: 10px 22px; font-size: 14px; font-weight: 600; cursor: pointer;
+  transition: opacity .15s;
+}
+.btn-primary:hover { opacity: .85; }
+.btn-sm {
+  background: var(--surface2); color: var(--text); border: 1px solid var(--border2);
+  border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer;
+  transition: background .15s;
+}
+.btn-sm:hover { background: var(--border); }
+
+/* ── App shell ───────────────────────────────────────── */
+#app { display: none; }
+
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 10px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+header h1 { font-size: 16px; font-weight: 700; white-space: nowrap; }
+.header-meta { color: var(--muted); font-size: 12px; }
+header .spacer { flex: 1; }
+#generated-time { color: var(--muted); font-size: 11px; }
+
+/* ── Filter bar ──────────────────────────────────────── */
+#filters {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: 10px 20px; display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-end;
+}
+.filter-group { display: flex; flex-direction: column; gap: 5px; }
+.filter-group label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.chip-row { display: flex; gap: 4px; flex-wrap: wrap; }
+.chip {
+  padding: 3px 10px; border-radius: 20px; border: 1px solid var(--border2);
+  background: transparent; color: var(--muted); font-size: 12px; cursor: pointer;
+  transition: all .15s; white-space: nowrap;
+}
+.chip.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+.range-row { display: flex; align-items: center; gap: 8px; }
+.range-row input[type=range] { width: 120px; accent-color: var(--accent); }
+.range-val { font-size: 12px; color: var(--text); min-width: 48px; }
+select {
+  background: var(--surface2); border: 1px solid var(--border2); color: var(--text);
+  border-radius: 6px; padding: 4px 8px; font-size: 12px; cursor: pointer;
+}
+
+/* ── Cards container ─────────────────────────────────── */
+#cards {
+  max-width: 960px; margin: 0 auto; padding: 20px 16px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+#no-results { text-align: center; padding: 48px; color: var(--muted); }
+
+/* ── Accommodation card ──────────────────────────────── */
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden; position: relative;
+}
+.card:hover .booked-banner { opacity: 1 !important; pointer-events: auto !important; }
+.card-header {
+  padding: 14px 16px 10px; display: flex; align-items: flex-start; gap: 12px;
+}
+.rank {
+  min-width: 32px; height: 32px; border-radius: 8px; background: var(--surface2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: var(--muted); flex-shrink: 0;
+}
+.rank.top3 { background: #2d2a1a; color: var(--yellow); }
+.card-title-row { flex: 1; min-width: 0; }
+.card-name {
+  font-size: 15px; font-weight: 700; color: var(--text);
+  text-decoration: none; display: inline;
+}
+.card-name:hover { color: var(--accent); }
+.card-region { color: var(--muted); font-size: 12px; margin-top: 1px; }
+.card-score {
+  font-size: 22px; font-weight: 800; color: var(--green);
+  flex-shrink: 0; line-height: 1; margin-top: 2px;
+}
+.card-score span { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+/* image strip */
+.img-strip {
+  display: flex; gap: 4px; overflow-x: auto; padding: 0 16px 10px;
+  scrollbar-width: thin; scroll-snap-type: x mandatory;
+}
+.img-strip img {
+  height: 140px; width: auto; min-width: 100px; max-width: 220px;
+  border-radius: 8px; object-fit: cover; flex-shrink: 0;
+  scroll-snap-align: start; cursor: pointer;
+}
+.img-strip img:hover { opacity: 0.85; }
+
+/* perks */
+.perks { padding: 0 16px 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+.perk {
+  padding: 2px 9px; border-radius: 20px; font-size: 11px; font-weight: 500;
+  background: var(--surface2); border: 1px solid var(--border2); color: var(--muted);
+}
+.perk.hot { border-color: #7c3aed44; background: #1e1433; color: #a78bfa; }
+.perk.nat { border-color: #05966944; background: #0d2318; color: #34d399; }
+.perk.act { border-color: #0369a144; background: #0c1e2d; color: #60a5fa; }
+
+/* weather strip */
+.weather-strip {
+  padding: 6px 16px; display: flex; gap: 18px; flex-wrap: wrap; align-items: center;
+  background: var(--surface2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+}
+/* decision bar */
+.decision-bar {
+  display: flex; gap: 6px; padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.decision-btn {
+  padding: 4px 14px; border-radius: 20px; border: 1px solid var(--border2);
+  background: transparent; color: var(--muted); font-size: 12px; cursor: pointer;
+  transition: all .15s; font-weight: 500;
+}
+.decision-btn:hover { opacity: .8; }
+.decision-btn.active-yes  { background:#064e3b; border-color:#34d399; color:#34d399; }
+.decision-btn.active-maybe{ background:#1c1500; border-color:#fbbf24; color:#fbbf24; }
+.decision-btn.active-no   { background:#3b0a0a; border-color:#f87171; color:#f87171; }
+.card[data-decision=yes]  { border-left: 3px solid #34d399; }
+.card[data-decision=maybe]{ border-left: 3px solid #fbbf24; }
+.card[data-decision=no]   { border-left: 3px solid #f87171; opacity: .6; }
+.card[data-booked=true]   { opacity: .45; filter: grayscale(.6); }
+.booked-banner {
+  position: absolute; top: 12px; right: 12px;
+  background: #4b5563; color: #d1d5db; font-size: 10px; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px; border: 1px solid #6b7280;
+  cursor: pointer; user-select: none;
+}
+.booked-banner:hover { background: #374151; }
+
+/* privacy stars editor */
+.privacy-stars { display: inline-flex; gap: 2px; cursor: pointer; user-select: none; }
+.privacy-stars span { font-size: 14px; transition: transform .1s; }
+.privacy-stars span:hover { transform: scale(1.25); }
+.privacy-stars.dirty { outline: 1px dashed var(--yellow); border-radius: 4px; padding: 0 2px; }
+/* floating save button */
+#save-scores-btn {
+  display: none; position: fixed; bottom: 24px; right: 24px; z-index: 999;
+  background: var(--yellow); color: #000; border: none; border-radius: 10px;
+  padding: 10px 20px; font-size: 13px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 16px #0008;
+}
+#save-scores-btn:hover { opacity: .85; }
+.weather-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--muted); }
+.weather-item strong { color: var(--text); }
+
+/* best combo summary */
+.combo-summary { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+@media (max-width: 600px) { .combo-summary { grid-template-columns: 1fr; } }
+.flight-row { display: flex; align-items: baseline; gap: 6px; font-size: 12px; }
+.flight-route { font-weight: 700; font-size: 13px; color: var(--text); }
+.flight-time { color: var(--muted); }
+.flight-airline { color: var(--cyan); }
+.flight-price { color: var(--yellow); font-weight: 600; margin-left: auto; }
+.stay-row { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+.combo-totals {
+  grid-column: 1 / -1; padding-top: 8px; border-top: 1px solid var(--border);
+  display: flex; gap: 20px; flex-wrap: wrap;
+}
+.total-item { display: flex; flex-direction: column; gap: 1px; }
+.total-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+.total-value { font-size: 16px; font-weight: 700; color: var(--text); }
+.total-value.cost { color: var(--green); }
+
+/* score bars */
+.score-bars { padding: 10px 16px 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px 16px; }
+@media (max-width: 500px) { .score-bars { grid-template-columns: 1fr; } }
+.bar-row { display: flex; align-items: center; gap: 7px; }
+.bar-label { font-size: 10px; color: var(--muted); width: 60px; text-align: right; flex-shrink: 0; text-transform: uppercase; letter-spacing: .04em; }
+.bar-track { flex: 1; height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 3px; transition: width .3s; }
+.bar-val { font-size: 10px; color: var(--muted); width: 30px; }
+
+/* expand toggle */
+.expand-btn {
+  width: 100%; padding: 8px 16px; background: none; border: none;
+  border-top: 1px solid var(--border); color: var(--muted); font-size: 12px;
+  cursor: pointer; text-align: left; display: flex; align-items: center; gap: 6px;
+  transition: background .15s;
+}
+.expand-btn:hover { background: var(--surface2); color: var(--text); }
+.expand-icon { transition: transform .2s; }
+.expand-icon.open { transform: rotate(90deg); }
+
+/* combo table */
+.combo-table-wrap {
+  display: none; border-top: 1px solid var(--border);
+  overflow-x: auto;
+}
+.combo-table-wrap.open { display: block; }
+.table-filters {
+  padding: 10px 16px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  border-bottom: 1px solid var(--border); background: var(--surface2);
+}
+.table-filters label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+thead th {
+  padding: 7px 10px; text-align: left; color: var(--muted); font-weight: 600;
+  font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
+  background: var(--surface2); border-bottom: 1px solid var(--border);
+  white-space: nowrap; cursor: pointer; user-select: none;
+}
+thead th:hover { color: var(--text); }
+thead th.sorted { color: var(--accent); }
+thead th .sort-arrow { margin-left: 3px; opacity: .6; }
+tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; }
+tbody tr:hover { background: var(--surface2); }
+tbody tr.best-combo { background: #1a2410; }
+tbody tr.best-combo:hover { background: #1f2d14; }
+tbody td { padding: 7px 10px; vertical-align: middle; white-space: nowrap; }
+.td-route { font-weight: 700; color: var(--text); }
+.td-time { color: var(--muted); }
+.td-airline { color: var(--cyan); max-width: 110px; overflow: hidden; text-overflow: ellipsis; }
+.td-price { color: var(--yellow); font-weight: 600; }
+.td-total { font-weight: 700; color: var(--green); }
+.td-score { font-weight: 700; }
+.td-days { color: var(--blue); }
+.badge-best {
+  font-size: 10px; background: var(--green); color: #0d1117;
+  padding: 1px 5px; border-radius: 3px; font-weight: 700; margin-left: 4px;
+}
+.no-combos { padding: 20px; text-align: center; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<!-- ── Load screen ─────────────────────────────────── -->
+<div id="load-screen">
+  <div style="font-size:40px">✈️</div>
+  <h1>Hemelvaartsweekend 2026</h1>
+  <p>Load your exported trip data to explore all flight and accommodation combinations.</p>
+  <button class="btn-primary" onclick="document.getElementById('file-input').click()">Load tripdata.json</button>
+  <input type="file" id="file-input" accept=".json" style="display:none">
+  <p style="font-size:12px">First run: <code>python export.py</code> · Then load the generated file<br>
+  Or serve locally: <code>python -m http.server 8000</code> (auto-loads)</p>
+</div>
+
+<!-- ── App ─────────────────────────────────────────── -->
+<div id="app">
+  <header>
+    <h1>✈️ Hemelvaartsweekend 2026</h1>
+    <span class="header-meta" id="header-meta"></span>
+    <div class="spacer"></div>
+    <span id="generated-time"></span>
+    <button class="btn-sm" onclick="location.protocol!=='file:' ? fetchAndInit() : document.getElementById('file-input2').click()">↺ Reload data</button>
+    <input type="file" id="file-input2" accept=".json" style="display:none">
+  </header>
+
+  <div id="filters">
+    <div class="filter-group">
+      <label>Sort by</label>
+      <div class="chip-row">
+        <div class="chip active" data-sort="score">Score</div>
+        <div class="chip" data-sort="cost">Cost</div>
+        <div class="chip" data-sort="days">Days</div>
+        <div class="chip" data-sort="travel">Travel time</div>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Depart from</label>
+      <div class="chip-row" id="filter-origins"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>Outbound date</label>
+      <div class="chip-row" id="filter-outbound-days"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>Return date</label>
+      <div class="chip-row" id="filter-return-days"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>Depart after</label>
+      <div class="range-row">
+        <input type="range" id="filter-depart-after" min="0" max="23" value="0" step="1">
+        <span class="range-val" id="val-depart-after">Any</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Return before</label>
+      <div class="range-row">
+        <input type="range" id="filter-return-before" min="0" max="23" value="23" step="1">
+        <span class="range-val" id="val-return-before">Any</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Max travel time</label>
+      <div class="range-row">
+        <input type="range" id="filter-max-travel" min="60" max="900" value="900" step="30">
+        <span class="range-val" id="val-max-travel">Any</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Max total cost</label>
+      <div class="range-row">
+        <input type="range" id="filter-max-cost" min="500" max="5000" value="5000" step="50">
+        <span class="range-val" id="val-max-cost">Any</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Max flight time</label>
+      <div class="range-row">
+        <input type="range" id="filter-max-flight" min="60" max="600" value="300" step="30">
+        <span class="range-val" id="val-max-flight">5h 0m</span>
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label>Min weather ☀</label>
+      <div class="range-row">
+        <input type="range" id="filter-min-weather" min="0" max="100" value="0" step="5">
+        <span class="range-val" id="val-min-weather">Any</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label>Min privacy 🌲</label>
+      <div class="range-row">
+        <input type="range" id="filter-min-privacy" min="1" max="5" value="1" step="1">
+        <span class="range-val" id="val-min-privacy">Any</span>
+      </div>
+    </div>
+    <div class="filter-group">
+      <label>Decision</label>
+      <div class="chip-row" id="filter-decisions"></div>
+    </div>
+
+    <div class="filter-group">
+      <label>🚗 Car rental (corporate)</label>
+      <div id="car-rental-links" style="display:flex;flex-direction:column;gap:5px;margin-top:4px"></div>
+    </div>
+  </div>
+
+  <div id="cards"></div>
+</div>
+<button id="save-scores-btn">💾 Save privacy scores</button>
+
+<script>
+// ── State ────────────────────────────────────────────────
+let rawData = null;
+
+// ── Decisions (persisted in localStorage) ────────────────────────────────────
+const DECISIONS_KEY = 'tripplan_decisions';
+const DECISION_LABELS = { yes: '✅ Yes', maybe: '🤔 Maybe', no: '❌ No' };
+
+function loadDecisions() {
+  try { return JSON.parse(localStorage.getItem(DECISIONS_KEY) || '{}'); }
+  catch { return {}; }
+}
+function saveDecision(accName, value) {
+  const d = loadDecisions();
+  if (value === null) delete d[accName];
+  else d[accName] = value;
+  localStorage.setItem(DECISIONS_KEY, JSON.stringify(d));
+}
+
+// ── Availability / booked status (localStorage) ──────────────────────────────
+const BOOKED_KEY = 'tripplan_booked_v2';
+const BOOKED_DEFAULTS = [
+  // Airbnb unavailable
+  'Chalet Treehouse Fundres - Private Hot Tub',
+  'ChaletLakeAlpe & Alpine Basque',
+  'Glamping Tinyhouse Oldřichov - Sauna & Hot Tub',
+  'Langhe Loft Albaretto - View of Barolo',
+  // Booking.com unavailable
+  'Chalet Berg',
+  'Les 2 Chalets Alpins & Bains Nordiques',
+];
+
+function loadBooked() {
+  try {
+    const stored = localStorage.getItem(BOOKED_KEY);
+    if (stored !== null) return new Set(JSON.parse(stored));
+    // First run: seed with known-unavailable properties
+    const defaults = new Set(BOOKED_DEFAULTS);
+    localStorage.setItem(BOOKED_KEY, JSON.stringify([...defaults]));
+    return defaults;
+  } catch { return new Set(); }
+}
+function toggleBooked(accName) {
+  const b = loadBooked();
+  if (b.has(accName)) b.delete(accName); else b.add(accName);
+  localStorage.setItem(BOOKED_KEY, JSON.stringify([...b]));
+}
+function isBooked(accName) { return loadBooked().has(accName); }
+
+// ── Privacy scores (localStorage + exportable to DB) ─────────────────────────
+const PRIVACY_KEY = 'tripplan_privacy';
+
+function loadPrivacyScores() {
+  try { return JSON.parse(localStorage.getItem(PRIVACY_KEY) || '{}'); }
+  catch { return {}; }
+}
+function savePrivacyScore(accName, score) {
+  const p = loadPrivacyScores();
+  p[accName] = score;
+  localStorage.setItem(PRIVACY_KEY, JSON.stringify(p));
+}
+// Effective score: localStorage overrides JSON data
+function effectivePrivacy(acc) {
+  const overrides = loadPrivacyScores();
+  return overrides[acc.name] ?? acc.privacy_score ?? 3;
+}
+
+// pendingScores tracks what's changed this session (for the export button)
+let pendingScores = {};
+
+// ── Image index (loaded from images/index.json) ───────────────────────────────
+let imageIndex = {};
+
+// ── Car rental deep links ─────────────────────────────────────────────────────
+const CAR_RENTAL_LINKS = [
+  { name: 'Avis',       icon: '🟥', url: 'https://www.avis.com/en/corporate/B771090' },
+  { name: 'Sixt',       icon: '🟧', url: 'https://corporate-guest.sixt.com/?sfid=0010N0000554tC9' },
+  { name: 'Enterprise', icon: '🟩', url: 'https://legacy.enterprise.com/car_rental/deeplinkmap.do?bid=028&refId=MCRSFTPU' },
+];
+
+// ── Google Flights URL generator (protobuf encoder) ───────────────────────────
+// Reverse-engineered from real Google Flights URLs (verified byte-perfect match).
+// tfs param = base64url protobuf. Inner leg fields 8/9/10/11 = time window constraints.
+function makeFlightsUrl(outDate, outOrigin, outDest, outDepH, outArrH,
+                        retDate, retOrigin, retDest, retDepH, retArrH,
+                        adults=2) {
+  function vi(n) {
+    const b = [];
+    do { b.push((n & 0x7f) | (n > 0x7f ? 0x80 : 0)); n >>>= 7; } while (n > 0);
+    return b;
+  }
+  function fv(num, val) { return [...vi((num<<3)|0), ...vi(val)]; }
+  function fb(num, data) { return [...vi((num<<3)|2), ...vi(data.length), ...data]; }
+  function fs(s) { return Array.from(new TextEncoder().encode(s)); }
+  function airport(c) { return [...fv(1,1), ...fb(2,fs(c))]; }
+  function leg(d, o, dst, depH, arrH) {
+    const inner = [
+      ...fb(2, fs(d)),
+      // Time window: field8=earliest dep (4am), field9=latest dep, field10=earliest arr (6am), field11=latest arr
+      ...fv(8, 4), ...fv(9, depH),
+      ...fv(10, 6), ...fv(11, arrH),
+      ...fb(13, airport(o)),
+      ...fb(14, airport(dst)),
+    ];
+    return inner;
+  }
+  const stopsFilter = [0x08, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x01];
+  const msg = [
+    ...fv(1,28), ...fv(2,2),
+    ...fb(3, leg(outDate, outOrigin, outDest, outDepH, outArrH)),
+    ...fb(3, leg(retDate, retOrigin, retDest, retDepH, retArrH)),
+    ...fv(8,1), ...fv(8,2),  // outer field 8 twice (observed pattern)
+    ...fv(9,1), ...fv(14,1),
+    ...fb(16, stopsFilter),
+    ...fv(19,1),
+  ];
+  let bin = '';
+  new Uint8Array(msg).forEach(b => bin += String.fromCharCode(b));
+  const b64 = btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=/g,'');
+  return `https://www.google.com/travel/flights/search?tfs=${b64}`;
+}
+
+function comboFlightsUrl(combo) {
+  function h(dt) { return parseInt((dt || '').split(' ')[1] || '12'); }
+  return makeFlightsUrl(
+    combo.outbound.depart_dt.split(' ')[0], combo.outbound.origin, combo.outbound.destination,
+    h(combo.outbound.depart_dt), h(combo.outbound.arrive_dt),
+    combo.return.depart_dt.split(' ')[0], combo.return.origin, combo.return.destination,
+    h(combo.return.depart_dt), h(combo.return.arrive_dt),
+  );
+}
+
+function updateSaveBtn() {
+  const n = Object.keys(pendingScores).length;
+  const btn = document.getElementById('save-scores-btn');
+  btn.style.display = n > 0 ? 'block' : 'none';
+  btn.textContent = `💾 Export ${n} privacy score${n !== 1 ? 's' : ''} → DB`;
+}
+
+let state = {
+  sortBy: 'score',
+  origins: new Set(),
+  outboundDays: new Set(),
+  returnDays: new Set(),
+  departAfterH: 0,
+  returnBeforeH: 23,
+  maxTravelMin: 900,
+  maxCost: 5000,
+  minWeather: 0,
+  maxFlightMin: 300,
+  minPrivacy: 1,
+  decisions: new Set(['yes','maybe','no','undecided']),  // which to show
+  expanded: new Set(),
+  selectedCombos: {},  // accName -> comboIndex
+  tableSort: {},       // accName -> {col, dir}
+  tableFilters: {},    // accName -> {outDay, retDay, origin}
+};
+
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const DIM_COLORS = ['#34d399','#60a5fa','#fbbf24','#a78bfa','#fb923c','#22d3ee','#f472b6'];
+const DIM_LABELS = ['cost','travel','weather','accom','days','activ','conv'];
+
+// ── Load data ─────────────────────────────────────────────
+function handleFile(file) {
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      rawData = JSON.parse(e.target.result);
+      initApp();
+    } catch(err) {
+      alert('Failed to parse JSON: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+document.getElementById('file-input').addEventListener('change', e => e.target.files[0] && handleFile(e.target.files[0]));
+document.getElementById('file-input2').addEventListener('change', e => e.target.files[0] && handleFile(e.target.files[0]));
+
+// Fetch tripdata + images with cache-busting, then init
+function fetchAndInit() {
+  const t = Date.now();
+  Promise.all([
+    fetch('tripdata.json?t=' + t).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch('images/index.json?t=' + t).then(r => r.ok ? r.json() : {}).catch(() => {}),
+  ]).then(([tripdata, imgs]) => {
+    if (tripdata) {
+      rawData = tripdata;
+      imageIndex = imgs || {};
+      initApp();
+    }
+  });
+}
+
+// Auto-fetch if served via HTTP — load tripdata + image index in parallel
+if (location.protocol !== 'file:') {
+  Promise.all([
+    fetch('tripdata.json?t=' + Date.now()).then(r => r.ok ? r.json() : null).catch(() => null),
+    fetch('images/index.json?t=' + Date.now()).then(r => r.ok ? r.json() : {}).catch(() => {}),
+  ]).then(([tripdata, imgs]) => {
+    if (tripdata) {
+      rawData = tripdata;
+      imageIndex = imgs || {};
+      initApp();
+    }
+  });
+}
+
+function initApp() {
+  document.getElementById('load-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  document.getElementById('generated-time').textContent = 'Generated ' + rawData.generated;
+
+  // Render car rental links
+  document.getElementById('car-rental-links').innerHTML = CAR_RENTAL_LINKS.map(l =>
+    `<a href="${l.url}" target="_blank" style="color:var(--accent);font-size:12px;text-decoration:none;padding:4px 8px;background:var(--surface);border-radius:6px;border:1px solid var(--border)">${l.icon} ${l.name}</a>`
+  ).join('');
+
+  // Collect all unique values for filter chips
+  const allCombos = rawData.accommodations.flatMap(a => a.combos);
+  const origins = [...new Set(allCombos.map(c => c.outbound.origin))].sort();
+  const outDays = [...new Set(allCombos.map(c => dayLabel(c.outbound.depart_dt)))];
+  const retDays = [...new Set(allCombos.map(c => dayLabel(c.return.depart_dt)))];
+  const dayOrder = ['Wed','Thu','Fri','Sat','Sun','Mon','Tue'];
+  outDays.sort((a,b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+  retDays.sort((a,b) => dayOrder.indexOf(a) - dayOrder.indexOf(b));
+
+  state.origins = new Set(origins);
+  state.outboundDays = new Set(outDays);
+  state.returnDays = new Set(retDays);
+
+  // Max cost
+  const maxCost = Math.max(...allCombos.map(c => c.total_cost));
+  const costSlider = document.getElementById('filter-max-cost');
+  costSlider.max = Math.ceil(maxCost / 100) * 100;
+  costSlider.value = costSlider.max;
+  state.maxCost = parseInt(costSlider.value);
+
+  // Max travel
+  const maxTravel = Math.max(...allCombos.map(c => c.total_travel_min));
+  const travelSlider = document.getElementById('filter-max-travel');
+  travelSlider.max = Math.ceil(maxTravel / 30) * 30;
+  travelSlider.value = travelSlider.max;
+  state.maxTravelMin = parseInt(travelSlider.value);
+
+  buildChips('filter-origins', origins, state.origins);
+  buildChips('filter-outbound-days', outDays, state.outboundDays);
+  buildChips('filter-return-days', retDays, state.returnDays);
+
+  bindControls();
+  render();
+}
+
+function buildChips(containerId, values, activeSet) {
+  const el = document.getElementById(containerId);
+  el.innerHTML = '';
+  values.forEach(v => {
+    const chip = document.createElement('div');
+    chip.className = 'chip' + (activeSet.has(v) ? ' active' : '');
+    chip.textContent = v;
+    chip.dataset.value = v;
+    chip.dataset.group = containerId;
+    el.appendChild(chip);
+  });
+}
+
+function bindControls() {
+  // Sort chips
+  document.querySelectorAll('[data-sort]').forEach(el => {
+    el.addEventListener('click', () => {
+      document.querySelectorAll('[data-sort]').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+      state.sortBy = el.dataset.sort;
+      render();
+    });
+  });
+
+  // Filter chips (toggle)
+  document.getElementById('filters').addEventListener('click', e => {
+    const chip = e.target.closest('.chip[data-group]');
+    if (!chip) return;
+    const group = chip.dataset.group;
+    const value = chip.dataset.value;
+    const setMap = {
+      'filter-origins': 'origins',
+      'filter-outbound-days': 'outboundDays',
+      'filter-return-days': 'returnDays',
+    };
+    const key = setMap[group];
+    if (!key) return;
+    if (state[key].has(value)) {
+      if (state[key].size > 1) { state[key].delete(value); chip.classList.remove('active'); }
+    } else {
+      state[key].add(value); chip.classList.add('active');
+    }
+    render();
+  });
+
+  // Sliders
+  function bindSlider(id, valId, stateKey, fmt) {
+    const slider = document.getElementById(id);
+    const valEl = document.getElementById(valId);
+    slider.addEventListener('input', () => {
+      state[stateKey] = parseInt(slider.value);
+      valEl.textContent = fmt(parseInt(slider.value), slider);
+      render();
+    });
+    valEl.textContent = fmt(parseInt(slider.value), slider);
+  }
+
+  bindSlider('filter-depart-after', 'val-depart-after', 'departAfterH',
+    (v, s) => v === parseInt(s.min) ? 'Any' : `${String(v).padStart(2,'0')}:00`);
+  bindSlider('filter-return-before', 'val-return-before', 'returnBeforeH',
+    (v, s) => v === parseInt(s.max) ? 'Any' : `${String(v).padStart(2,'0')}:00`);
+  bindSlider('filter-max-travel', 'val-max-travel', 'maxTravelMin',
+    (v, s) => v === parseInt(s.max) ? 'Any' : fmtMin(v));
+  bindSlider('filter-max-cost', 'val-max-cost', 'maxCost',
+    (v, s) => v === parseInt(s.min) ? 'Any' : `€${v.toLocaleString()}`);
+  bindSlider('filter-max-flight', 'val-max-flight', 'maxFlightMin',
+    (v, s) => v === parseInt(s.max) ? 'Any' : fmtMin(v));
+  bindSlider('filter-min-weather', 'val-min-weather', 'minWeather',
+    (v, s) => v === parseInt(s.min) ? 'Any' : weatherLabel(v / 100));
+  bindSlider('filter-min-privacy', 'val-min-privacy', 'minPrivacy',
+    (v, s) => v === parseInt(s.min) ? 'Any' : '★'.repeat(v) + '☆'.repeat(5-v));
+
+  // Decision filter chips
+  const decisionOpts = [
+    { value: 'yes', label: '✅ Yes' },
+    { value: 'maybe', label: '🤔 Maybe' },
+    { value: 'no', label: '❌ No' },
+    { value: 'undecided', label: '— Undecided' },
+  ];
+  const decRow = document.getElementById('filter-decisions');
+  decisionOpts.forEach(({ value, label }) => {
+    const chip = document.createElement('div');
+    chip.className = 'chip active';
+    chip.dataset.decvalue = value;
+    chip.textContent = label;
+    chip.addEventListener('click', () => {
+      if (state.decisions.has(value)) {
+        if (state.decisions.size > 1) { state.decisions.delete(value); chip.classList.remove('active'); }
+      } else { state.decisions.add(value); chip.classList.add('active'); }
+      render();
+    });
+    decRow.appendChild(chip);
+  });
+
+  // Decision button clicks on cards (delegated)
+  document.getElementById('cards').addEventListener('click', e => {
+    const btn = e.target.closest('.decision-btn[data-decision]');
+    if (!btn) return;
+    const card = btn.closest('.card');
+    const accName = card.dataset.acc;
+    const val = btn.dataset.decision;
+    const decisions = loadDecisions();
+    const current = decisions[accName];
+    // Toggle off if already set
+    const newVal = current === val ? null : val;
+    saveDecision(accName, newVal);
+    // Update card appearance without full re-render
+    card.dataset.decision = newVal || '';
+    card.querySelectorAll('.decision-btn').forEach(b => {
+      b.className = 'decision-btn' + (b.dataset.decision === newVal ? ` active-${newVal}` : '');
+    });
+  });
+
+  // Privacy star clicks (delegated)
+  document.getElementById('cards').addEventListener('click', e => {
+    const star = e.target.closest('.privacy-stars span[data-v]');
+    if (!star) return;
+    const widget = star.closest('.privacy-stars');
+    const accName = widget.dataset.acc;
+    const newScore = parseInt(star.dataset.v);
+    pendingScores[accName] = newScore;
+    savePrivacyScore(accName, newScore);
+    // Update star display immediately
+    widget.dataset.score = newScore;
+    widget.querySelectorAll('span[data-v]').forEach(s => {
+      s.textContent = parseInt(s.dataset.v) <= newScore ? '★' : '☆';
+    });
+    widget.classList.add('dirty');
+    updateSaveBtn();
+  });
+
+  // Save button — download JSON
+  document.getElementById('save-scores-btn').addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(pendingScores, null, 2)], {type: 'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'privacy_scores.json';
+    a.click();
+  });
+}
+
+// ── Filtering ─────────────────────────────────────────────
+function filterCombos(combos) {
+  return combos.filter(c => {
+    if (!state.origins.has(c.outbound.origin)) return false;
+    if (!state.outboundDays.has(dayLabel(c.outbound.depart_dt))) return false;
+    if (!state.returnDays.has(dayLabel(c.return.depart_dt))) return false;
+    const departH = parseInt(c.outbound.depart_dt.split(' ')[1]);
+    if (departH < state.departAfterH) return false;
+    const returnH = parseInt(c.return.depart_dt.split(' ')[1]);
+    if (returnH > state.returnBeforeH) return false;
+    if (c.total_travel_min > state.maxTravelMin) return false;
+    if (c.total_cost > state.maxCost) return false;
+    if (c.outbound.duration_min > state.maxFlightMin) return false;
+    if (c.return.duration_min > state.maxFlightMin) return false;
+    return true;
+  });
+}
+
+// ── Render ────────────────────────────────────────────────
+function render() {
+  const container = document.getElementById('cards');
+
+  // For each accommodation, filter its combos and apply weather threshold
+  const accWithCombos = rawData.accommodations.map(acc => ({
+    ...acc,
+    filteredCombos: filterCombos(acc.combos),
+  })).filter(acc =>
+    acc.filteredCombos.length > 0 &&
+    (acc.weather_score_norm || 0) >= state.minWeather / 100 &&
+    effectivePrivacy(acc) >= state.minPrivacy &&
+    (() => {
+      const d = loadDecisions()[acc.name] || 'undecided';
+      return state.decisions.has(d);
+    })()
+  );
+
+  // Sort by selected dimension
+  accWithCombos.sort((a, b) => {
+    const ca = a.filteredCombos[0], cb = b.filteredCombos[0];
+    if (state.sortBy === 'score') return cb.score - ca.score;
+    if (state.sortBy === 'cost') return ca.total_cost - cb.total_cost;
+    if (state.sortBy === 'days') return cb.holiday_hours - ca.holiday_hours;
+    if (state.sortBy === 'travel') return ca.total_travel_min - cb.total_travel_min;
+    return 0;
+  });
+
+  document.getElementById('header-meta').textContent =
+    `${accWithCombos.length} properties · ${accWithCombos.reduce((s,a) => s + a.filteredCombos.length, 0)} combos`;
+
+  if (!accWithCombos.length) {
+    container.innerHTML = '<div id="no-results">No options match your filters.</div>';
+    return;
+  }
+
+  // Reuse existing cards where possible (update in-place) or rebuild
+  container.innerHTML = accWithCombos.map((acc, i) => renderCard(acc, i + 1)).join('');
+  attachCardEvents(container);
+}
+
+function renderCard(acc, rank) {
+  const combos = acc.filteredCombos;
+  const selIdx = Math.min(state.selectedCombos[acc.name] || 0, combos.length - 1);
+  const combo = combos[selIdx];
+  const isExpanded = state.expanded.has(acc.name);
+
+  const scoreColor = combo.score >= 0.7 ? 'var(--green)' : combo.score >= 0.55 ? 'var(--yellow)' : 'var(--orange)';
+  const rankClass = rank <= 3 ? 'rank top3' : 'rank';
+
+  const perks = [];
+  if (acc.has_pool) perks.push(['hot','pool']);
+  if (acc.has_sauna) perks.push(['hot','sauna']);
+  if (acc.has_hottub) perks.push(['hot','hot tub']);
+  const ps = effectivePrivacy(acc);
+  if (acc.near_hiking) perks.push(['act','hiking']);
+  if (acc.near_mtb) perks.push(['act','MTB']);
+  if (acc.near_village) perks.push(['act','village']);
+  if (acc.view_score >= 4) perks.push(['nat',`view ${acc.view_score}★`]);
+
+  const perkHtml = perks.map(([cls, label]) => `<span class="perk ${cls}">${label}</span>`).join('');
+
+  const wnorm = acc.weather_score_norm || 0;
+  const wColor = wnorm >= 0.7 ? 'var(--green)' : wnorm >= 0.4 ? 'var(--yellow)' : 'var(--orange)';
+  const weather = acc.avg_temp_c != null
+    ? `<span class="weather-item">🌡 <strong>${acc.avg_temp_c}°C</strong></span>
+       <span class="weather-item">☀ <strong>${acc.sun_hours}h</strong> sun</span>
+       <span class="weather-item">🌧 <strong>${acc.rain_chance_pct}%</strong> rain</span>
+       <span class="weather-item" style="margin-left:auto">
+         <span style="background:${wColor};color:#0d1117;font-weight:700;font-size:11px;padding:2px 8px;border-radius:12px">${weatherLabel(wnorm)}</span>
+       </span>`
+    : `<span class="weather-item" style="color:var(--muted)">No weather data</span>`;
+
+  const ratingStr = acc.rating ? `${acc.rating}★${acc.review_count ? ` (${acc.review_count})` : ''}` : '';
+  const driveStr = acc.drive_from_airport_min ? `${acc.drive_from_airport_min} min drive` : '';
+  const metaItems = [ratingStr, acc.type, driveStr].filter(Boolean);
+
+  const nights = combo.nights || Math.round(combo.acc_price / (acc.price_per_night || combo.acc_price));
+  const nightsLabel = acc.price_per_night
+    ? `${nights} night${nights !== 1 ? 's' : ''} @ €${Math.round(acc.price_per_night)}/nt`
+    : `fixed stay`;
+
+  const barsHtml = combo.dims.map((d, i) => {
+    const pct = Math.round(d * 100);
+    return `<div class="bar-row">
+      <span class="bar-label">${DIM_LABELS[i]}</span>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${DIM_COLORS[i]}"></div></div>
+      <span class="bar-val">${d.toFixed(2)}</span>
+    </div>`;
+  }).join('');
+
+  const tableHtml = isExpanded ? renderComboTable(acc, combos, selIdx) : '';
+
+  const booked = isBooked(acc.name);
+  return `
+<div class="card" data-acc="${esc(acc.name)}" data-decision="${loadDecisions()[acc.name] || ''}" data-booked="${booked}">
+  ${booked ? `<div class="booked-banner" data-toggle-booked="${esc(acc.name)}" title="Click to mark as available">🔒 Booked / Unavailable</div>` : `<div class="booked-banner" data-toggle-booked="${esc(acc.name)}" title="Click to mark as booked" style="opacity:0;pointer-events:none">🔒</div>`}
+  <div class="card-header">
+    <div class="${rankClass}">#${rank}</div>
+    <div class="card-title-row">
+      ${acc.url
+        ? `<a class="card-name" href="${acc.url}" target="_blank">${esc(acc.name)}</a>`
+        : `<span class="card-name">${esc(acc.name)}</span>`}
+      <div class="card-region">${esc(acc.region)} · ${esc(acc.country)}${metaItems.length ? ' · ' + metaItems.join(' · ') : ''}</div>
+    </div>
+    <div class="card-score" style="color:${scoreColor}">${combo.score.toFixed(3)}<span>/1</span></div>
+  </div>
+
+  ${(() => {
+    const imgs = imageIndex[acc.name] || [];
+    return imgs.length ? `<div class="img-strip">${imgs.map(p => `<img src="${p}" alt="" loading="lazy" onclick="this.requestFullscreen&&this.requestFullscreen()">`).join('')}</div>` : '';
+  })()}
+
+  ${perks.length ? `<div class="perks">${perkHtml}</div>` : ''}
+
+  <div class="decision-bar">${
+    Object.entries(DECISION_LABELS).map(([val, label]) => {
+      const cur = loadDecisions()[acc.name];
+      return `<button class="decision-btn${cur===val?' active-'+val:''}" data-decision="${val}">${label}</button>`;
+    }).join('')
+  }</div>
+
+  <div class="weather-strip">
+    ${weather}
+    &nbsp;·&nbsp;
+    🌲 <span class="privacy-stars${pendingScores[acc.name] !== undefined ? ' dirty' : ''}" data-acc="${esc(acc.name)}" data-score="${ps}">
+      ${[1,2,3,4,5].map(i => `<span data-v="${i}">${i <= ps ? '★' : '☆'}</span>`).join('')}
+    </span>
+  </div>
+
+  <div class="combo-summary">
+    <div>
+      <div class="flight-row">
+        <span style="color:var(--muted);font-size:11px;min-width:38px">OUT ✈</span>
+        <span class="flight-route">${combo.outbound.origin}→${combo.outbound.destination}</span>
+        <span class="flight-time">${fmtDT(combo.outbound.depart_dt)}</span>
+        <span class="flight-airline">${combo.outbound.airline}</span>
+        <span class="flight-price">€${combo.outbound.price_eur}</span>
+        ${combo.ob_luggage ? `<span style="color:var(--muted);font-size:10px" title="2x carry-on bag">+€${combo.ob_luggage} 🧳</span>` : ''}
+        <a href="${comboFlightsUrl(combo)}" target="_blank" style="margin-left:auto;font-size:10px;color:var(--accent);text-decoration:none;opacity:0.8" title="Search on Google Flights">🔍GF</a>
+      </div>
+      <div class="flight-row" style="margin-top:4px">
+        <span style="color:var(--muted);font-size:11px;min-width:38px">RET ✈</span>
+        <span class="flight-route">${combo.return.origin}→${combo.return.destination}</span>
+        <span class="flight-time">${fmtDT(combo.return.depart_dt)}</span>
+        <span class="flight-airline">${combo.return.airline}</span>
+        <span class="flight-price">€${combo.return.price_eur}</span>
+        ${combo.ret_luggage ? `<span style="color:var(--muted);font-size:10px" title="2x carry-on bag">+€${combo.ret_luggage} 🧳</span>` : ''}
+      </div>
+      <div class="stay-row" style="margin-top:4px">
+        <span style="color:var(--muted);font-size:11px;min-width:38px">🏠</span>
+        <span>${esc(acc.name.split('-')[0].trim())}</span>
+        <span style="margin-left:auto;color:var(--yellow);font-weight:600">€${combo.acc_price}</span>
+        <span style="color:var(--muted)">${nightsLabel}</span>
+      </div>
+      <div class="stay-row" style="margin-top:4px">
+        <span style="color:var(--muted);font-size:11px;min-width:38px">🚗</span>
+        <span>Rental car</span>
+        <span style="margin-left:auto;color:var(--yellow);font-weight:600">€${combo.car_cost}</span>
+        <span style="color:var(--muted)">€${combo.car_rental} rental · €${combo.car_fuel} fuel</span>
+      </div>
+    </div>
+    <div class="combo-totals">
+      <div class="total-item"><span class="total-label">Total cost</span><span class="total-value cost">€${combo.total_cost.toLocaleString()}</span></div>
+      <div class="total-item"><span class="total-label">Flights</span><span class="total-value" style="font-size:13px">€${(combo.outbound.price_eur + combo.return.price_eur).toLocaleString()}</span></div>
+      <div class="total-item"><span class="total-label">Stay</span><span class="total-value" style="font-size:13px">€${combo.acc_price}</span></div>
+      <div class="total-item"><span class="total-label">Car</span><span class="total-value" style="font-size:13px">€${combo.car_cost}${combo.car_one_way ? `<span style="color:var(--yellow);font-size:10px" title="incl. €${combo.car_one_way} one-way drop fee"> +€${combo.car_one_way}↩</span>` : ''}</span></div>
+      ${combo.luggage_cost ? `<div class="total-item"><span class="total-label">Luggage 🧳</span><span class="total-value" style="font-size:13px">€${combo.luggage_cost}</span></div>` : ''}
+      <div class="total-item"><span class="total-label">Holiday</span><span class="total-value">${(combo.holiday_hours/24).toFixed(1)}d</span></div>
+      <div class="total-item"><span class="total-label">Travel</span><span class="total-value">${fmtMin(combo.total_travel_min)}</span></div>
+    </div>
+  </div>
+
+  <div class="score-bars">${barsHtml}</div>
+
+  <button class="expand-btn" data-acc="${esc(acc.name)}">
+    <span class="expand-icon${isExpanded ? ' open' : ''}">▶</span>
+    ${isExpanded ? 'Hide' : 'Explore'} ${combos.length} flight combination${combos.length !== 1 ? 's' : ''}
+  </button>
+  <div class="combo-table-wrap${isExpanded ? ' open' : ''}" data-acc="${esc(acc.name)}">
+    ${tableHtml}
+  </div>
+</div>`;
+}
+
+function renderComboTable(acc, combos, selIdx) {
+  const tf = state.tableFilters[acc.name] || {};
+  const ts = state.tableSort[acc.name] || { col: 'score', dir: 'desc' };
+
+  // Collect unique values for table-level filter chips
+  const tOrigins = [...new Set(combos.map(c => c.outbound.origin))].sort();
+  const tOutDays = [...new Set(combos.map(c => dayLabel(c.outbound.depart_dt)))];
+  const tRetDays = [...new Set(combos.map(c => dayLabel(c.return.depart_dt)))];
+  const dayOrder = ['Wed','Thu','Fri','Sat','Sun','Mon','Tue'];
+  tOutDays.sort((a,b) => dayOrder.indexOf(a)-dayOrder.indexOf(b));
+  tRetDays.sort((a,b) => dayOrder.indexOf(a)-dayOrder.indexOf(b));
+
+  let filtered = combos.filter(c => {
+    if (tf.origin && c.outbound.origin !== tf.origin) return false;
+    if (tf.outDay && dayLabel(c.outbound.depart_dt) !== tf.outDay) return false;
+    if (tf.retDay && dayLabel(c.return.depart_dt) !== tf.retDay) return false;
+    return true;
+  });
+
+  filtered = [...filtered].sort((a, b) => {
+    let av, bv;
+    if (ts.col === 'score') { av = a.score; bv = b.score; }
+    else if (ts.col === 'cost') { av = a.total_cost; bv = b.total_cost; }
+    else if (ts.col === 'days') { av = a.holiday_hours; bv = b.holiday_hours; }
+    else if (ts.col === 'travel') { av = a.total_travel_min; bv = b.total_travel_min; }
+    else if (ts.col === 'out-price') { av = a.outbound.price_eur; bv = b.outbound.price_eur; }
+    else if (ts.col === 'ret-price') { av = a.return.price_eur; bv = b.return.price_eur; }
+    else if (ts.col === 'car') { av = a.car_cost; bv = b.car_cost; }
+    else return 0;
+    return ts.dir === 'desc' ? bv - av : av - bv;
+  });
+
+  const chipRow = (values, active, type) => values.map(v =>
+    `<span class="chip${active === v ? ' active' : ''}"
+      data-table-filter="${type}" data-acc="${esc(acc.name)}" data-val="${v}" style="font-size:11px;padding:2px 8px">${v}</span>`
+  ).join('');
+
+  const th = (col, label) => {
+    const isSorted = ts.col === col;
+    const arrow = isSorted ? (ts.dir === 'desc' ? ' ↓' : ' ↑') : '';
+    return `<th class="${isSorted ? 'sorted' : ''}" data-table-sort="${col}" data-acc="${esc(acc.name)}">${label}<span class="sort-arrow">${arrow}</span></th>`;
+  };
+
+  const rows = filtered.map((c, i) => {
+    const isBest = i === 0 && !tf.origin && !tf.outDay && !tf.retDay;
+    const isSel = combos.indexOf(c) === selIdx;
+    const scoreColor = c.score >= 0.7 ? '#34d399' : c.score >= 0.55 ? '#fbbf24' : '#fb923c';
+    return `<tr class="${isBest ? 'best-combo' : ''}" data-combo-idx="${combos.indexOf(c)}" data-acc="${esc(acc.name)}" style="cursor:pointer" title="Click to select this combo">
+      <td><span class="td-route">${c.outbound.origin}→${c.outbound.destination}</span>${isBest ? '<span class="badge-best">best</span>' : ''}</td>
+      <td class="td-time">${fmtDT(c.outbound.depart_dt)}</td>
+      <td class="td-airline">${c.outbound.airline}</td>
+      <td class="td-price">€${c.outbound.price_eur}</td>
+      <td><span class="td-route">${c.return.origin}→${c.return.destination}</span></td>
+      <td class="td-time">${fmtDT(c.return.depart_dt)}</td>
+      <td class="td-airline">${c.return.airline}</td>
+      <td class="td-price">€${c.return.price_eur}</td>
+      <td class="td-price">€${c.acc_price}</td>
+      <td class="td-price" title="Rental €${c.car_rental} + Fuel €${c.car_fuel}">€${c.car_cost}</td>
+      <td class="td-total">€${c.total_cost.toLocaleString()}</td>
+      <td class="td-days">${(c.holiday_hours/24).toFixed(1)}d</td>
+      <td>${fmtMin(c.total_travel_min)}</td>
+      <td class="td-score" style="color:${scoreColor}">${c.score.toFixed(3)}</td>
+      <td><a href="${comboFlightsUrl(c)}" target="_blank" style="color:var(--accent);font-size:11px;text-decoration:none" title="Search on Google Flights">🔍</a></td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="14" class="no-combos">No combos match table filters</td></tr>`;
+
+  return `
+<div class="table-filters">
+  <label>Origin:</label> ${chipRow(tOrigins, tf.origin, 'origin')}
+  <label style="margin-left:8px">Depart:</label> ${chipRow(tOutDays, tf.outDay, 'outDay')}
+  <label style="margin-left:8px">Return:</label> ${chipRow(tRetDays, tf.retDay, 'retDay')}
+</div>
+<table>
+  <thead><tr>
+    ${th('','OUT')}${th('','Date')}${th('','Airline')}${th('out-price','€')}
+    ${th('','RET')}${th('','Date')}${th('','Airline')}${th('ret-price','€')}
+    ${th('','Stay')}${th('car','🚗')}${th('cost','Total')}${th('days','Days')}${th('travel','Travel')}${th('score','Score')}${th('','✈')}
+  </tr></thead>
+  <tbody>${rows}</tbody>
+</table>`;
+}
+
+function attachCardEvents(container) {
+  // Expand/collapse
+  container.addEventListener('click', e => {
+    const btn = e.target.closest('.expand-btn');
+    if (btn) {
+      const name = btn.dataset.acc;
+      const wrap = container.querySelector(`.combo-table-wrap[data-acc="${CSS.escape(name)}"]`);
+      const icon = btn.querySelector('.expand-icon');
+      if (state.expanded.has(name)) {
+        state.expanded.delete(name);
+        wrap.classList.remove('open');
+        wrap.innerHTML = '';
+        btn.innerHTML = `<span class="expand-icon">▶</span> Explore ${rawData.accommodations.find(a=>a.name===name)?.combos.filter(c => filterCombos([c]).length).length} flight combinations`;
+        icon && (icon.classList.remove('open'));
+      } else {
+        state.expanded.add(name);
+        wrap.classList.add('open');
+        const acc = rawData.accommodations.find(a => a.name === name);
+        const filteredCombos = filterCombos(acc.combos);
+        const selIdx = state.selectedCombos[name] || 0;
+        wrap.innerHTML = renderComboTable(acc, filteredCombos, selIdx);
+        btn.innerHTML = `<span class="expand-icon open">▶</span> Hide ${filteredCombos.length} flight combinations`;
+        attachTableEvents(wrap, container);
+      }
+      return;
+    }
+
+    // Booked banner toggle
+    const bookedBtn = e.target.closest('[data-toggle-booked]');
+    if (bookedBtn) {
+      const name = bookedBtn.dataset.toggleBooked;
+      toggleBooked(name);
+      // Update card in place
+      const card = container.querySelector(`.card[data-acc="${CSS.escape(name)}"]`);
+      const nowBooked = isBooked(name);
+      card.dataset.booked = nowBooked;
+      bookedBtn.textContent = nowBooked ? '🔒 Booked / Unavailable' : '🔒';
+      if (nowBooked) { bookedBtn.style.opacity=''; bookedBtn.style.pointerEvents=''; bookedBtn.title='Click to mark as available'; }
+      else { bookedBtn.style.opacity='0'; bookedBtn.style.pointerEvents='none'; bookedBtn.title='Click to mark as booked'; }
+      return;
+    }
+
+    // Combo row selection
+    const row = e.target.closest('tr[data-combo-idx]');
+    if (row) {
+      const name = row.dataset.acc;
+      const idx = parseInt(row.dataset.comboIdx);
+      state.selectedCombos[name] = idx;
+      // Re-render just this card
+      const acc = rawData.accommodations.find(a => a.name === name);
+      const filteredCombos = filterCombos(acc.combos);
+      const cardEl = container.querySelector(`.card[data-acc="${CSS.escape(name)}"]`);
+      const rank = parseInt(cardEl.querySelector('.rank').textContent.replace('#',''));
+      const newHtml = renderCard({...acc, filteredCombos}, rank);
+      const tmp = document.createElement('div');
+      tmp.innerHTML = newHtml;
+      cardEl.replaceWith(tmp.firstElementChild);
+      attachCardEvents(container);
+      // Re-expand if was expanded
+      if (state.expanded.has(name)) {
+        const newCard = container.querySelector(`.card[data-acc="${CSS.escape(name)}"]`);
+        const wrap = newCard.querySelector('.combo-table-wrap');
+        wrap.classList.add('open');
+        wrap.innerHTML = renderComboTable(acc, filteredCombos, state.selectedCombos[name] || 0);
+        newCard.querySelector('.expand-btn').innerHTML = `<span class="expand-icon open">▶</span> Hide ${filteredCombos.length} flight combinations`;
+        attachTableEvents(wrap, container);
+      }
+    }
+  });
+
+  attachTableEvents(container, container);
+}
+
+function attachTableEvents(el, container) {
+  // Table-level filter chips
+  el.addEventListener('click', e => {
+    const chip = e.target.closest('[data-table-filter]');
+    if (!chip) return;
+    const name = chip.dataset.acc;
+    const type = chip.dataset.tableFilter;
+    const val = chip.dataset.val;
+    if (!state.tableFilters[name]) state.tableFilters[name] = {};
+    const tf = state.tableFilters[name];
+    tf[type] = tf[type] === val ? undefined : val;
+    // Re-render table
+    const acc = rawData.accommodations.find(a => a.name === name);
+    const filteredCombos = filterCombos(acc.combos);
+    const wrap = container.querySelector(`.combo-table-wrap[data-acc="${CSS.escape(name)}"]`);
+    if (wrap && wrap.classList.contains('open')) {
+      wrap.innerHTML = renderComboTable(acc, filteredCombos, state.selectedCombos[name] || 0);
+      attachTableEvents(wrap, container);
+    }
+  });
+
+  // Table sort
+  el.addEventListener('click', e => {
+    const th = e.target.closest('[data-table-sort]');
+    if (!th || !th.dataset.tableSort) return;
+    const col = th.dataset.tableSort;
+    const name = th.dataset.acc;
+    if (!col) return;
+    const ts = state.tableSort[name] || { col: 'score', dir: 'desc' };
+    if (ts.col === col) {
+      state.tableSort[name] = { col, dir: ts.dir === 'desc' ? 'asc' : 'desc' };
+    } else {
+      state.tableSort[name] = { col, dir: 'desc' };
+    }
+    const acc = rawData.accommodations.find(a => a.name === name);
+    const filteredCombos = filterCombos(acc.combos);
+    const wrap = container.querySelector(`.combo-table-wrap[data-acc="${CSS.escape(name)}"]`);
+    if (wrap && wrap.classList.contains('open')) {
+      wrap.innerHTML = renderComboTable(acc, filteredCombos, state.selectedCombos[name] || 0);
+      attachTableEvents(wrap, container);
+    }
+  });
+}
+
+// ── Helpers ───────────────────────────────────────────────
+function weatherLabel(norm) {
+  if (norm >= 0.85) return '🌞 Excellent';
+  if (norm >= 0.65) return '⛅ Good';
+  if (norm >= 0.40) return '🌤 Fair';
+  return '🌧 Poor';
+}
+
+function dayLabel(dt) {
+  const d = new Date(dt.split(' ')[0]);
+  return DAY_NAMES[d.getUTCDay()];
+}
+function fmtDT(dt) {
+  const [date, time] = dt.split(' ');
+  const d = new Date(date);
+  return `${DAY_NAMES[d.getUTCDay()]} ${time}`;
+}
+function fmtMin(min) {
+  return `${Math.floor(min/60)}h ${min%60 > 0 ? (min%60)+'m' : ''}`.trim();
+}
+function esc(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+</script>
+</body>
+</html>
