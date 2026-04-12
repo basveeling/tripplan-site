@@ -548,6 +548,7 @@ let state = {
   maxFlightMin: 300,
   minPrivacy: 1,
   decisions: new Set(['yes','maybe','no','undecided']),  // which to show
+  hideUnavailable: true,   // hide grayed-out booked/unavailable by default
   expanded: new Set(),
   selectedCombos: {},  // accName -> comboIndex
   tableSort: {},       // accName -> {col, dir}
@@ -722,6 +723,20 @@ function bindControls() {
     (v, s) => v === parseInt(s.min) ? 'Any' : '★'.repeat(v) + '☆'.repeat(5-v));
 
   // Decision filter chips
+  // Hide unavailable toggle
+  const hideUnavailChip = document.createElement('div');
+  hideUnavailChip.className = 'chip' + (state.hideUnavailable ? ' active' : '');
+  hideUnavailChip.textContent = '🚫 Hide unavailable';
+  hideUnavailChip.style.marginRight = '8px';
+  hideUnavailChip.addEventListener('click', () => {
+    state.hideUnavailable = !state.hideUnavailable;
+    hideUnavailChip.classList.toggle('active', state.hideUnavailable);
+    render();
+  });
+  document.getElementById('filter-decisions').parentElement.insertBefore(
+    hideUnavailChip, document.getElementById('filter-decisions')
+  );
+
   const decisionOpts = [
     { value: 'yes', label: '✅ Yes' },
     { value: 'maybe', label: '🤔 Maybe' },
@@ -820,6 +835,7 @@ function render() {
     acc.filteredCombos.length > 0 &&
     (acc.weather_score_norm || 0) >= state.minWeather / 100 &&
     effectivePrivacy(acc) >= state.minPrivacy &&
+    !(state.hideUnavailable && isBooked(acc.name)) &&
     (() => {
       const d = loadDecisions()[acc.name] || 'undecided';
       return state.decisions.has(d);
