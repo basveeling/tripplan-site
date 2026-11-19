@@ -247,6 +247,26 @@ color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space
 .lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
 .lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
 #none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
 </style>
 </head>
 <body>
@@ -297,6 +317,29 @@ Ski days assume Innsbruck airport → Stubai house ≈ 1 h 15, Salzburg airport 
 <div class="note" style="border-left-color:var(--yellow)"><strong>Correction.</strong> Earlier figures on this
 page priced the return legs in the wrong direction — Amsterdam→Innsbruck on the Sunday instead of
 Innsbruck→Amsterdam. Real returns are dearer, and the numbers below replace them.</div>
+
+<div class="note" style="border-left-color:var(--yellow)"><strong>Correction: &ldquo;no service&rdquo; was
+wrong — the real constraint is group size.</strong> Earlier this page said Munich, Vienna, Verona, Lyon and
+Grenoble had no usable service. In fact all but Verona are served daily; what they lack is <b>nine seats in a
+single fare bucket</b>, which is what a 9-passenger search requires.
+<div class="tbl-wrap" style="margin-top:9px"><table>
+<thead><tr><th>Route, Thu 21 Jan</th><th class="num">At 9 pax</th><th class="num">At 1 pax</th><th>Cheapest single seat</th></tr></thead><tbody>
+<tr class="best"><td><b>AMS → Salzburg</b></td><td class="num"><b>available</b></td><td class="num">yes</td><td>Transavia nonstop, €101–240</td></tr>
+<tr class="best"><td><b>AMS → Innsbruck</b></td><td class="num"><b>available</b></td><td class="num">yes</td><td>Transavia nonstop, €145</td></tr>
+<tr><td>AMS → Munich</td><td class="num">none</td><td class="num">6</td><td>Lufthansa nonstop €150</td></tr>
+<tr><td>AMS → Vienna</td><td class="num">none</td><td class="num">8</td><td>KLM nonstop €136</td></tr>
+<tr><td>AMS → Lyon</td><td class="num">none</td><td class="num">6</td><td>KLM nonstop €132</td></tr>
+<tr><td>AMS → Graz</td><td class="num">none</td><td class="num">4</td><td>Lufthansa 1-stop €216</td></tr>
+<tr><td>AMS → Grenoble</td><td class="num">none</td><td class="num">1</td><td>BA 1-stop €247</td></tr>
+<tr><td>AMS → Verona</td><td class="num">none</td><td class="num">none</td><td>genuinely no service</td></tr>
+</tbody></table></div>
+<b>The low-cost carriers are the ones with group availability.</b> Transavia returns nine-seat fares to both
+Salzburg and Innsbruck; the legacy carriers do not, at least not as an ordinary online purchase. That does not
+make them impossible — KLM and Lufthansa both run group desks, usually from 10 passengers, and a group fare may
+differ in either direction — but it means anything other than Transavia needs a phone call or a split booking
+across several reservations, with the fare risk that carries.
+<br><br>So the practical choice for ten people really is Salzburg or Innsbruck, which is how this page ranks
+them. Verona is the one genuine blank: no service at any group size, which closes the natural Dolomites gateway.</div>
 
 <h3>Schladming / Ski amadé — fly via Salzburg</h3>
 <div class="tbl-wrap"><table>
