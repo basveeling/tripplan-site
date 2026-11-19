@@ -3,271 +3,279 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ski 2027 — Group Trip by Night Train</title>
+<title>Ski 2027 — Group Trip Options</title>
 <style>
-:root {
-  --bg: #0d1117; --surface: #161b22; --surface2: #1e2533;
-  --border: #2a3245; --border2: #374160;
-  --text: #e2e8f0; --muted: #7c8db0; --accent: #818cf8;
-  --green: #34d399; --yellow: #fbbf24; --orange: #fb923c;
-  --red: #f87171; --blue: #60a5fa; --cyan: #22d3ee;
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text);
-  font-family: system-ui, -apple-system, sans-serif; font-size: 14px; line-height: 1.6; }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-
-header {
-  position: sticky; top: 0; z-index: 100; background: var(--surface);
-  border-bottom: 1px solid var(--border); padding: 12px 20px;
-  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
-}
-header h1 { font-size: 16px; font-weight: 700; white-space: nowrap; }
-.header-meta { color: var(--muted); font-size: 12px; }
-header .spacer { flex: 1; }
-
-main { max-width: 940px; margin: 0 auto; padding: 24px 16px 72px; }
-
-h2 { font-size: 19px; font-weight: 700; margin: 34px 0 10px;
-     padding-bottom: 7px; border-bottom: 1px solid var(--border); }
-h2:first-of-type { margin-top: 10px; }
-h3 { font-size: 14px; font-weight: 700; margin: 20px 0 6px; color: var(--cyan); }
-p { margin: 9px 0; }
-ul { margin: 9px 0 9px 20px; } li { margin: 4px 0; }
-strong { color: #fff; font-weight: 650; }
-
-.lede { font-size: 15px; color: var(--muted); margin-bottom: 4px; }
-
-.card { background: var(--surface); border: 1px solid var(--border);
-        border-radius: 12px; padding: 16px 18px; margin: 14px 0; }
-.card.pick { border-color: var(--green); background: #12201b; }
-.card.warn { border-color: var(--border2); background: var(--surface2); }
-.card h3 { margin-top: 0; }
-.pick-label { display: inline-block; background: var(--green); color: #06281c;
-  font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 20px; vertical-align: middle; margin-left: 8px; }
-
-.rail { display: flex; flex-wrap: wrap; gap: 0; margin: 16px 0;
-        border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-.rail div { flex: 1 1 128px; padding: 11px 13px; background: var(--surface);
-            border-right: 1px solid var(--border); }
-.rail div:last-child { border-right: none; }
-.rail .d { font-size: 10px; color: var(--muted); text-transform: uppercase;
-           letter-spacing: .07em; font-weight: 700; }
-.rail .v { font-size: 14px; font-weight: 650; margin-top: 3px; }
-.rail .n { font-size: 11px; color: var(--muted); margin-top: 2px; }
-
-.tbl-wrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--border);
-            border-radius: 12px; }
-table { border-collapse: collapse; width: 100%; min-width: 620px; font-size: 13px; }
-th { background: var(--surface2); text-align: left; padding: 9px 12px;
-     font-size: 10px; text-transform: uppercase; letter-spacing: .06em;
-     color: var(--muted); font-weight: 700; white-space: nowrap; }
-td { padding: 10px 12px; border-top: 1px solid var(--border);
-     background: var(--surface); vertical-align: top; }
-tr.best td { background: #12201b; }
-td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
-.price { font-weight: 750; color: var(--green); }
-.sub { color: var(--muted); font-size: 12px; }
-
-.tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 7px;
-       border-radius: 20px; letter-spacing: .04em; white-space: nowrap; }
-.tag.good { background: #12301f; color: var(--green); border: 1px solid #1d4a31; }
-.tag.mid  { background: #2d2a1a; color: var(--yellow); border: 1px solid #4a431d; }
-.tag.bad  { background: #301a1a; color: var(--red); border: 1px solid #4a1d1d; }
-
-.note { border-left: 3px solid var(--border2); padding: 2px 0 2px 14px;
-        color: var(--muted); margin: 12px 0; }
-.note strong { color: var(--text); }
-
-footer { border-top: 1px solid var(--border); margin-top: 40px; padding-top: 16px;
-         color: var(--muted); font-size: 12px; }
-code { background: var(--surface2); padding: 1px 5px; border-radius: 4px;
-       font-family: ui-monospace, monospace; font-size: 12px; color: var(--cyan); }
-@media (max-width: 560px) { main { padding: 18px 13px 56px; } h2 { font-size: 17px; } }
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1e2533;--border:#2a3245;--border2:#374160;
+--text:#e2e8f0;--muted:#7c8db0;--accent:#818cf8;--green:#34d399;--yellow:#fbbf24;--red:#f87171;--cyan:#22d3ee;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.55}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);
+padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:16px;font-weight:700;white-space:nowrap}
+.header-meta{color:var(--muted);font-size:12px} header .spacer{flex:1}
+main{max-width:980px;margin:0 auto;padding:20px 16px 70px}
+.lede{color:var(--muted);font-size:14px;margin-bottom:18px}
+h2{font-size:17px;font-weight:700;margin:30px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+p{margin:8px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.card-header{padding:14px 16px 10px;display:flex;align-items:flex-start;gap:12px}
+.rank{min-width:32px;height:32px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;
+justify-content:center;font-size:13px;font-weight:700;color:var(--muted);flex-shrink:0}
+.rank.top3{background:#2d2a1a;color:var(--yellow)}
+.card-title-row{flex:1;min-width:0}
+.card-name{font-size:15px;font-weight:700;color:var(--text)}
+.card-name:hover{color:var(--accent)}
+.card-region{color:var(--muted);font-size:12px;margin-top:1px}
+.card-shape{color:var(--cyan);font-size:12px;margin-top:3px}
+.card-score{font-size:22px;font-weight:800;color:var(--green);flex-shrink:0;line-height:1;margin-top:2px;text-align:right}
+.card-score span{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:3px}
+.img-strip{display:flex;gap:4px;overflow-x:auto;padding:0 16px 10px}
+.img-strip img{height:118px;width:auto;border-radius:6px;flex-shrink:0;object-fit:cover}
+.card-tagline{margin:0 16px 10px;display:inline-block;background:#1a2733;color:var(--cyan);
+border:1px solid #24394a;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;letter-spacing:.03em}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--border);
+border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.m{background:var(--surface);padding:10px 14px} .m.wide{grid-column:1/-1}
+.m .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.m .v{font-size:13px;margin-top:3px} .m .v.price{font-size:15px;font-weight:750;color:var(--green)}
+.m .s{font-size:11px;color:var(--muted);margin-top:3px}
+.conn{line-height:1.5}
+.perks{padding:10px 16px 0;display:flex;flex-wrap:wrap;gap:5px}
+.perk{font-size:11px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);
+padding:2px 8px;border-radius:20px}
+.card-note{padding:10px 16px 0;color:var(--text);font-size:12.5px}
+.card-foot{padding:9px 16px 13px;color:var(--muted);font-size:11px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px}
+.tag.good{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.tag.mid{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+.tag.bad{background:#301a1a;color:var(--red);border:1px solid #4a1d1d}
+.sub{color:var(--muted);font-size:11px;font-weight:400}
+.rail{display:flex;flex-wrap:wrap;margin:14px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.rail div{flex:1 1 125px;padding:10px 13px;background:var(--surface);border-right:1px solid var(--border)}
+.rail div:last-child{border-right:none}
+.rail .d{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+.rail .v{font-size:14px;font-weight:650;margin-top:3px}
+.rail .n{font-size:11px;color:var(--muted);margin-top:2px}
+.note{border-left:3px solid var(--border2);padding:2px 0 2px 13px;color:var(--muted);margin:12px 0}
+.note strong{color:var(--text)}
+.tbl-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--border);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+th{background:var(--surface2);text-align:left;padding:8px 11px;font-size:10px;text-transform:uppercase;
+letter-spacing:.06em;color:var(--muted);font-weight:700;white-space:nowrap}
+td{padding:9px 11px;border-top:1px solid var(--border);background:var(--surface)}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.best td{background:#12201b}
+footer{border-top:1px solid var(--border);margin-top:36px;padding-top:15px;color:var(--muted);font-size:11.5px}
+@media(max-width:560px){main{padding:16px 12px 50px}.img-strip img{height:96px}}
 </style>
 </head>
 <body>
 
 <header>
   <h1>🚠 Ski 2027</h1>
-  <span class="header-meta">10 people · 4 ski days · Thu 21 – Sun 24 Jan 2027 · by night train</span>
+  <span class="header-meta">8–12 people · self-catered · by train from Amsterdam</span>
   <div class="spacer"></div>
-  <span class="header-meta">researched 19 Nov 2026</span>
+  <span class="header-meta">prices pulled 19 Nov 2026</span>
 </header>
 
 <main>
+<p class="lede">Every price below is a real quote for 10 adults pulled through the booking calendar on the
+stated dates — not an indicative &ldquo;from&rdquo; rate. Totals per person exclude food and drink.</p>
 
-<p class="lede">A four-day ski trip for 8–12 people, reached entirely by train from Amsterdam,
-in a single self-catered house. Every price below is a real quote for 10 adults pulled
-through the booking calendar — not an indicative "from" rate.</p>
-
-<h2>The shape</h2>
-
-<p>The ÖBB <strong>Nightjet runs Amsterdam → Innsbruck every night</strong>. That single fact
-determines the whole trip: it converts two travel days into two nights of sleep, removes
-flights and ski-bag fees, and cuts the trip to <strong>three paid nights</strong>.</p>
-
+<h2>Getting there</h2>
+<p>The ÖBB <strong>Nightjet runs Amsterdam → Innsbruck every night</strong>, which turns two travel days
+into two nights of sleep and removes flights and ski-bag fees entirely. For the short Austrian trips that
+means boarding Wednesday evening and skiing from Thursday morning.</p>
 <div class="rail">
-  <div><div class="d">Wed 20</div><div class="v">19:00</div><div class="n">Amsterdam C — board NJ&nbsp;421</div></div>
-  <div><div class="d">Thu 21</div><div class="v">09:14</div><div class="n">Innsbruck · bus up the valley</div></div>
-  <div><div class="d">Thu–Sun</div><div class="v">4 ski days</div><div class="n">Thu is ¾ day from ~11:00</div></div>
-  <div><div class="d">Sun 24</div><div class="v">20:30</div><div class="n">Innsbruck — board NJ&nbsp;420</div></div>
-  <div><div class="d">Mon 25</div><div class="v">10:00</div><div class="n">Amsterdam C</div></div>
+  <div><div class="d">Wed</div><div class="v">19:00</div><div class="n">Amsterdam C — NJ&nbsp;421</div></div>
+  <div><div class="d">Thu</div><div class="v">09:14</div><div class="n">Innsbruck · bus up the valley</div></div>
+  <div><div class="d">Thu–Sun</div><div class="v">3.75 days</div><div class="n">on snow from ~11:00 Thu</div></div>
+  <div><div class="d">Sun</div><div class="v">20:30</div><div class="n">Innsbruck — NJ&nbsp;420</div></div>
+  <div><div class="d">Mon</div><div class="v">10:00</div><div class="n">Amsterdam C</div></div>
 </div>
+<div class="note"><strong>France is the exception.</strong> Eurostar Snow runs direct, Amsterdam Centraal
+05:24 → Bourg-Saint-Maurice 14:41, but <strong>Saturdays only in both directions</strong> — so France is a
+full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
 
-<p>Two weekend days, two weekdays, <strong>three paid nights</strong>, and two leave days
-(Thursday and Friday) plus a Monday morning that arrives back at 10:00. Skis travel free and
-the new-generation stock has a dedicated ski area.</p>
+<h2>The options</h2>
 
-<div class="note"><strong>Why Wednesday out, not Thursday.</strong> With a Monday return ruled out,
-the trip has to end Sunday. Departing Thursday evening would leave only three ski days
-(Fri/Sat/Sun). Shifting the outbound to Wednesday evening recovers the fourth day at no extra
-accommodation cost — the Wednesday night is spent on the train, not in the house.</div>
-
+<div class="card">
+  <div class="card-header">
+    <div class="rank top3">1</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.booking.com/hotel/at/untersillerhof.en-gb.html" target="_blank" rel="noopener">Untersillerhof</a>
+      <div class="card-region">Neustift im Stubaital, Tirol</div>
+      <div class="card-shape">Thu 21 – Sun 24 Jan 2027 · 3 nights · <b>3.75 ski days</b></div>
+    </div>
+    <div class="card-score">€55<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/untersillerhof-1.jpg" alt="" loading="lazy"><img src="images/ski2027/untersillerhof-2.jpg" alt="" loading="lazy"><img src="images/ski2027/untersillerhof-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">Cheapest that works</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€1,659</div><div class="s">3 bedrooms · 130 m² · sleeps 10</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 4 days <b>€267.90</b> — covers the glacier, Schlick 2000, Serles and Elfer</div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈ 14 h overnight + 45 min bus</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">Stubai glacier on the same pass as backup</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn">Schlick 2000 <b>9 min</b> by road — 22 km of piste, 1,000–2,240 m. Stubai glacier further up the valley. Innsbruck Hbf 27 min.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">€575–645</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Ski storage</span></div>
+  <div class="card-note">Cheapest viable option, but 3 bedrooms and 130 m² is genuinely tight for ten. Best suited to a group that doesn't mind sharing.</div>
+  <div class="card-foot">Price source: Booking.com · quoted 19 Nov 2026</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="rank top3">2</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.booking.com/hotel/at/romantikpension-egerdach-mieders1.en-gb.html" target="_blank" rel="noopener">Panorama-Ferienhaus im Stubaital</a>
+      <div class="card-region">Mieders, Stubaital, Tirol</div>
+      <div class="card-shape">Thu 21 – Sun 24 Jan 2027 · 3 nights · <b>3.75 ski days</b></div>
+    </div>
+    <div class="card-score">€65<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/panorama-1.jpg" alt="" loading="lazy"><img src="images/ski2027/panorama-2.jpg" alt="" loading="lazy"><img src="images/ski2027/panorama-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">Best rooms</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€1,944</div><div class="s">5 double bedrooms · 5 bathrooms · 160 m² · rated 9.8</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 4 days <b>€267.90</b></div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈ 14 h overnight + 50 min bus</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag mid">Moderate</span></div><div class="s">Local hill is low and marginal in March; the glacier is a drive away</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn">Serlesbahnen <b>on the doorstep</b> — but only 8 km of piste, 970–1,600 m. Schlick 2000 28 min, Bergeralm 21 min, Stubai glacier ≈ 45 min. Innsbruck Hbf 36 min.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">€585–655</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Sauna</span><span class="perk">5 bathrooms</span><span class="perk">Mountain view</span><span class="perk">Barbecue</span></div>
+  <div class="card-note">Five double bedrooms and five bathrooms is the best sleeping layout found anywhere for ten adults. Free cancellation to 22 Dec. Sold out for every March window.</div>
+  <div class="card-foot">Price source: Booking.com · quoted 19 Nov 2026</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="rank top3">3</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.booking.com/hotel/at/luxury-cottage-in-neustift-im-stubaital-with-a-sauna.en-gb.html" target="_blank" rel="noopener">Chalet in Stubaital by Ski Slope &amp; Sauna</a>
+      <div class="card-region">Neustift im Stubaital, Tirol</div>
+      <div class="card-shape">Thu 21 – Sun 24 Jan 2027 · 3 nights · <b>3.75 ski days</b></div>
+    </div>
+    <div class="card-score">€72<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/skislope-1.jpg" alt="" loading="lazy"><img src="images/ski2027/skislope-2.jpg" alt="" loading="lazy"><img src="images/ski2027/skislope-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">Best house</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€2,152</div><div class="s">6 bedrooms · 3 bathrooms · 400 m² · rated 4.78 (46)</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 4 days <b>€267.90</b></div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈ 14 h overnight + 45 min bus</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">Glacier-backed; the most snow-sure of the Stubai set</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn"><b>On the piste.</b> Schlick 2000 9 min, Stubai glacier up the valley. Innsbruck Hbf 27 min.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">€650–720</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Sauna</span><span class="perk">On the slope</span><span class="perk">400 m²</span><span class="perk">6 bedrooms</span></div>
+  <div class="card-note">The nicest house on the list and the only one actually on the snow. Currently discounted from €3,158 as a Black Friday deal — that will expire. Sold out in March.</div>
+  <div class="card-foot">Price source: Booking.com €2,152 · Airbnb €2,304 · quoted 19 Nov 2026</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="rank ">4</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.booking.com/hotel/at/untersillerhof.en-gb.html" target="_blank" rel="noopener">Untersillerhof — full week</a>
+      <div class="card-region">Neustift im Stubaital, Tirol</div>
+      <div class="card-shape">Sat 13 – Sat 20 Mar 2027 · 7 nights · <b>6 ski days</b></div>
+    </div>
+    <div class="card-score">€44<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/untersillerhof-1.jpg" alt="" loading="lazy"><img src="images/ski2027/untersillerhof-2.jpg" alt="" loading="lazy"><img src="images/ski2027/untersillerhof-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">Best value per ski day</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€3,102</div><div class="s">3 bedrooms · 130 m² · sleeps 10</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 6 days <b>€355</b></div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈ 14 h overnight + 45 min bus</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">March needs the glacier — which this pass covers</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn">Schlick 2000 <b>9 min</b>, Stubai glacier up the valley. Innsbruck Hbf 27 min.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">€830–900</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Ski storage</span><span class="perk">Best €/night of the season</span></div>
+  <div class="card-note">The lowest per-night price in the entire sweep, and 6 ski days instead of 4. More total spend, but far better value per day. Note the Nightjet is disrupted from 8 Feb by the Deutsches Eck closure.</div>
+  <div class="card-foot">Price source: Booking.com · quoted 19 Nov 2026</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="rank ">5</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.muse.holiday/en/dolomites/apartments/val-gardena/ortisei/panorama-apartments-walter/1005walter/1005c/" target="_blank" rel="noopener">Panorama Apartments Walter</a>
+      <div class="card-region">Ortisei, Val Gardena, Dolomites</div>
+      <div class="card-shape">Sat 23 – Sat 30 Jan 2027 · 7 nights · <b>6 ski days</b></div>
+    </div>
+    <div class="card-score">€69<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/walter-1.jpg" alt="" loading="lazy"><img src="images/ski2027/walter-2.jpg" alt="" loading="lazy"><img src="images/ski2027/walter-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">The Dolomites option</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€4,816</div><div class="s">2 apartments in one building · 5 + 5</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v">Dolomiti Superski 6 days <b>€407</b> (late Jan is the cheaper tier; mid-March is high season at €453)</div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Nightjet + Brenner train + bus ≈ €200–290 return</div><div class="s">≈ 20 h door to door</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag mid">Moderate</span></div><div class="s">No glacier, but very heavy snowmaking; south-facing slopes soften in March</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn"><b>Under 100 m to the lifts</b> and to the ski bus. Sella Ronda and the full <b>Dolomiti Superski — about 1,200 km</b> across 12 valleys.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">≈ €1,080</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Sella Ronda</span><span class="perk">Ski-in location</span><span class="perk">Dolomiti Superski</span></div>
+  <div class="card-note">The only real Dolomites quote for ten in a target week — and it is two apartments, not one house. No single Dolomites unit sleeping ten was bookable in any target week. If the group drops to 9, a single 4-bedroom flat at Cristlpek in Ortisei comes to €59 pp/night.</div>
+  <div class="card-foot">Price source: MUSE · quoted 19 Nov 2026</div>
+</div>
+<div class="card">
+  <div class="card-header">
+    <div class="rank ">6</div>
+    <div class="card-title-row">
+      <a class="card-name" href="https://www.chalet.nl/frankrijk/paradiski-les-arcs/vallandry/de-vallandry-f4034" target="_blank" rel="noopener">Chalet De Vallandry — La Charrue</a>
+      <div class="card-region">Vallandry, Paradiski / Les Arcs, France</div>
+      <div class="card-shape">Sat 23 – Sat 30 Jan 2027 · 7 nights · <b>6 ski days</b></div>
+    </div>
+    <div class="card-score">€166<span>pp / night</span></div>
+  </div>
+  <div class="img-strip"><img src="images/ski2027/vallandry-1.jpg" alt="" loading="lazy"><img src="images/ski2027/vallandry-2.jpg" alt="" loading="lazy"><img src="images/ski2027/vallandry-3.jpg" alt="" loading="lazy"></div>
+  <div class="card-tagline">Easiest travel</div>
+  <div class="metrics">
+    <div class="m"><div class="k">House</div><div class="v">€1,160 pp <span class='sub'>incl. lift pass</span></div><div class="s">10 people · 5 bedrooms · 3 bathrooms · 145 m²</div></div>
+    <div class="m"><div class="k">Lift pass</div><div class="v"><b>Included</b> — 6-day Les Arcs pass, plus linen, cleaning, water and tourist tax</div></div>
+    <div class="m"><div class="k">Night train</div><div class="v">Eurostar Snow direct ≈ €130–190 return</div><div class="s"><b>9 h 17 m, one direct train</b>, no night travel</div></div>
+    <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">Very high</span></div><div class="s">High and glacier-backed; the most reliable on this list in March</div></div>
+    <div class="m wide"><div class="k">Ski area &amp; connectivity</div><div class="v conn">Lift and piste <b>300 m</b>. Paradiski — <b>425 km</b> of piste, Les Arcs + La Plagne, up to 3,226 m.</div></div>
+    <div class="m"><div class="k">Total per person</div><div class="v price">≈ €1,320</div><div class="s">excl. food</div></div>
+  </div>
+  <div class="perks"><span class="perk">Private spa</span><span class="perk">Sauna</span><span class="perk">Turkish steam room</span><span class="perk">Open fire</span><span class="perk">Car-free chalet park</span></div>
+  <div class="card-note">By far the easiest journey — one train, Amsterdam 05:24 to Bourg-Saint-Maurice 14:41, and the price bundles the lift pass. But it is the most expensive per person, and all four March Saturdays are sold out. The advertised 'from €623' is an April price.</div>
+  <div class="card-foot">Price source: Chalet.nl · quoted 19 Nov 2026</div>
+</div>
 <h2>When</h2>
-
-<div class="tbl-wrap">
-<table>
-<thead><tr><th>Window</th><th>Traffic</th><th>Price tier</th><th>Status</th></tr></thead>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Window</th><th>Traffic</th><th>Availability found</th></tr></thead>
 <tbody>
-<tr class="best"><td><strong>Thu 21 – Sun 24 Jan 2027</strong></td><td><span class="tag good">Quiet</span></td><td>Lowest of the season</td><td>Tail of the &ldquo;January blues&rdquo;. Only one Polish holiday region is away. <strong>Houses confirmed available.</strong></td></tr>
-<tr><td>Thu 11 – Sun 14 Mar 2027</td><td><span class="tag mid">Filling</span></td><td>Low</td><td>Quiet on paper, but <strong>both Stubai houses are already sold out</strong> and the Nightjet is disrupted (below). Weaker than it looks.</td></tr>
-<tr><td><s>Fri 29 Jan – Mon 1 Feb</s></td><td colspan="3" class="sub">Ruled out — 30 Jan is not available.</td></tr>
-<tr><td>4 – 23 Feb 2027</td><td><span class="tag bad">Peak</span></td><td>Highest</td><td>Carnival is 8–9 Feb. Dutch, Belgian, German, UK, Danish, French and Polish holidays stack up. Avoid.</td></tr>
-</tbody>
-</table>
-</div>
+<tr class="best"><td><b>Thu 21 – Sun 24 Jan</b></td><td><span class="tag good">Quiet</span></td><td>All five Austrian houses available. Cheapest tier of the season.</td></tr>
+<tr class="best"><td><b>Sat 13 – Sat 20 Mar</b></td><td><span class="tag good">Quiet</span></td><td>Untersillerhof at its season-low €44 pp/night. Both other Stubai houses sold out.</td></tr>
+<tr><td>Sat 23 – Sat 30 Jan</td><td><span class="tag good">Quiet</span></td><td>The Dolomites and France weeks. Most Austrian houses already gone.</td></tr>
+<tr><td>Sat 6 – Sat 13 Mar</td><td><span class="tag mid">Filling</span></td><td>Nearly everything sold out in Austria; Dolomites available at €94 pp/night.</td></tr>
+<tr><td><s>Fri 29 Jan – Mon 1 Feb</s></td><td colspan="2" class="sub">Ruled out — 30 Jan unavailable.</td></tr>
+<tr><td>4 – 23 Feb</td><td><span class="tag bad">Peak</span></td><td>Carnival 8–9 Feb. Seven countries' holidays overlap. Prices up 40–90%.</td></tr>
+</tbody></table></div>
 
-<p>With 30 January unavailable and March largely sold out, <strong>21–24 January is effectively
-the only live window</strong> this season.</p>
-
-<h2>The house</h2>
-
-<div class="card pick">
-  <h3>Bauernhaustirol &ldquo;Peerhof&rdquo; <span class="pick-label">Best value</span></h3>
-  <p>Navis, Wipptal · <strong>&euro;1,880 for 3 nights = &euro;63 per person per night</strong></p>
-  <ul>
-    <li>5 bedrooms, <strong>10 beds, 5 bathrooms</strong> &mdash; a real farmhouse, not a squeeze</li>
-    <li>Rated <strong>4.94 from 90 reviews</strong>, Superhost &mdash; by far the strongest quality signal in the set</li>
-    <li>Side valley off the Wipptal. Quiet and characterful, but the weakest public transport here &mdash; check the bus before committing</li>
-  </ul>
-  <p><a href="https://www.airbnb.com/rooms/2570629" target="_blank" rel="noopener">View on Airbnb &rarr;</a></p>
-</div>
-
-<div class="card pick">
-  <h3>Panorama-Ferienhaus im Stubaital <span class="pick-label">Best for rail</span></h3>
-  <p>Mieders, Stubai valley · <strong>&euro;1,944 for 3 nights = &euro;65 per person per night</strong></p>
-  <ul>
-    <li><strong>Five double bedrooms and five bathrooms</strong>, 160 m&sup2;, sauna, rated 9.8</li>
-    <li>Free cancellation to 22 Dec, pay nothing until then</li>
-    <li>Booking shows <em>&ldquo;We have 1 left&rdquo;</em>, and it is already sold out for March</li>
-  </ul>
-  <p><a href="https://www.booking.com/hotel/at/romantikpension-egerdach-mieders1.en-gb.html" target="_blank" rel="noopener">View on Booking.com &rarr;</a></p>
-</div>
-
-<p>Stubai wins on rail logic: Innsbruck is the Nightjet terminus, the valley bus is about
-45 minutes, and the glacier tops out above 3,200 m &mdash; so snow is not in question.</p>
-
-<div class="tbl-wrap">
-<table>
-<thead><tr><th>House</th><th>Where</th><th class="num">3 nights</th><th class="num">&euro; pp/night</th><th>Sleeping</th><th>Platform</th></tr></thead>
-<tbody>
-<tr><td><a href="https://www.booking.com/hotel/at/untersillerhof.en-gb.html" target="_blank" rel="noopener">Untersillerhof</a></td>
-  <td>Neustift</td><td class="num price">&euro;1,659</td><td class="num">&euro;55</td>
-  <td>3 BR / 130 m&sup2; &mdash; tight for ten</td><td>Booking</td></tr>
-<tr class="best"><td><a href="https://www.airbnb.com/rooms/2570629" target="_blank" rel="noopener">Bauernhaustirol &ldquo;Peerhof&rdquo;</a></td>
-  <td>Navis</td><td class="num price">&euro;1,880</td><td class="num">&euro;63</td>
-  <td>5 BR / 10 beds / 5 bath &middot; 4.94&nbsp;(90)</td><td>Airbnb</td></tr>
-<tr><td><a href="https://www.airbnb.com/rooms/711485304452918093" target="_blank" rel="noopener">Chalet for up to 10</a></td>
-  <td>Steinach am Brenner</td><td class="num price">&euro;1,943</td><td class="num">&euro;65</td>
-  <td>4 BR / 3 bath &middot; 4.82&nbsp;(89) &middot; station in village</td><td>Airbnb</td></tr>
-<tr class="best"><td><a href="https://www.booking.com/hotel/at/romantikpension-egerdach-mieders1.en-gb.html" target="_blank" rel="noopener">Panorama-Ferienhaus</a></td>
-  <td>Stubaital</td><td class="num price">&euro;1,944</td><td class="num">&euro;65</td>
-  <td>5 doubles / 5 bath &middot; sauna &middot; 9.8</td><td>Booking</td></tr>
-<tr><td><a href="https://www.airbnb.com/rooms/1336350210522850525" target="_blank" rel="noopener">Haus L&auml;rchensteig</a></td>
-  <td>Stubai area</td><td class="num price">&euro;2,023</td><td class="num">&euro;67</td>
-  <td>5 BR / 4 bath &middot; 4.95&nbsp;(19)</td><td>Airbnb</td></tr>
-<tr><td><a href="https://www.booking.com/hotel/at/ferienhaus-sonneck-kappl.en-gb.html" target="_blank" rel="noopener">Ferienhaus Sonneck</a></td>
-  <td>Kappl (Ischgl area)</td><td class="num price">&euro;2,100</td><td class="num">&euro;70</td>
-  <td>5 BR / 3 bath</td><td>Booking</td></tr>
-<tr><td><a href="https://www.booking.com/hotel/at/chalet-glauninger.en-gb.html" target="_blank" rel="noopener">Chalet Glauninger</a></td>
-  <td>Schladming</td><td class="num price">&euro;2,254</td><td class="num">&euro;75</td>
-  <td>5 BR / 2 bath &middot; 150 m&sup2;</td><td>Booking &mdash; poor rail access</td></tr>
-<tr><td><a href="https://www.airbnb.com/rooms/52125308" target="_blank" rel="noopener">Chalet in Stubaital, Ski Slope &amp; Sauna</a></td>
-  <td>Neustift</td><td class="num price">&euro;2,286</td><td class="num">&euro;76</td>
-  <td>6 BR / 3 bath &middot; 400 m&sup2; &middot; on the piste</td><td>Booking &euro;2,286 &middot; Airbnb &euro;2,304</td></tr>
-</tbody>
-</table>
-</div>
-
-<div class="note"><strong>Check both platforms for the same house, every time.</strong> The Neustift
-ski-slope chalet came back at &euro;2,466 vs &euro;2,689 on the original dates, then &euro;2,286 vs
-&euro;2,304 on these &mdash; the cheaper platform flipped. Booking also returned &euro;2,445 and
-&euro;2,689 for identical dates minutes apart. Treat any single figure as roughly &plusmn;10%, and
-re-check at the moment of booking.</div>
-
-<div class="note"><strong>Thursday&ndash;Sunday is cheaper than Friday&ndash;Monday.</strong> The same
-ski-slope chalet is &euro;2,286 on Thu&ndash;Sun against &euro;2,689 on Fri&ndash;Mon &mdash; about
-&euro;400 saved for an extra ski day. Losing the Monday return improved the trip.</div>
-
-<h2>What it costs</h2>
-
-<div class="tbl-wrap">
-<table>
-<thead><tr><th>Per person</th><th class="num">€</th><th>Basis</th></tr></thead>
-<tbody>
-<tr><td>House (3 nights, split 10 ways)</td><td class="num">188–195</td><td>Confirmed quote, both lead houses</td></tr>
-<tr><td>Nightjet return, couchette</td><td class="num">150–220</td><td>Estimate — "from" fares are €50–60 each way, ski weekends price above that</td></tr>
-<tr><td>Lift pass, 4 days</td><td class="num">~220</td><td>Estimate — not yet verified for 2026/27</td></tr>
-<tr><td>Local buses</td><td class="num">~15</td><td>Innsbruck ↔ valley</td></tr>
-<tr class="best"><td><strong>Total, excluding food</strong></td><td class="num price">545–650</td><td>Well under the €100 pp/night accommodation ceiling</td></tr>
-</tbody>
-</table>
-</div>
-
-<h2>Two things that redirect the plan</h2>
-
-<div class="card warn">
-  <h3>The Dolomites don't work on four days</h3>
-  <p>Searches across Val Gardena, Alta Badia, Canazei, Corvara and Castelrotto returned
-  <strong>no bookable entire home for ten on a short stay</strong> — that inventory is weekly,
-  Saturday-to-Saturday. The train compounds it: Innsbruck 09:15 → Bolzano ~12:30 → Ortisei
-  ~14:00 costs the whole of Friday.</p>
-  <p>Cheap Trentino houses do exist (casa Vermiglio, about €43 pp/night) but that is Passo
-  Tonale rather than Dolomiti Superski, and it is badly served by rail.
-  <strong>The Dolomites by train is a seven-night trip, not a four-day one.</strong></p>
-</div>
-
-<div class="card warn">
-  <h3>The ski train is Saturday-only</h3>
-  <p>Eurostar Snow (formerly Thalys Neige) does still run Amsterdam → Bourg-Saint-Maurice,
-  19 Dec 2026 – 3 Apr 2027, departing Amsterdam Centraal 05:24 and arriving 14:41, from about €65.
-  But <strong>returns are Saturday and Sunday only</strong> — there is no Sat–Tue or Sat–Wed.</p>
-  <p>So it forces a full <strong>Sat–Sat week: six ski days, seven nights</strong>. A bigger and
-  pricier trip, though the Saturday changeover does match French rentals neatly. Worth doing
-  deliberately; it cannot be squeezed into four days.</p>
-</div>
-
-<h2>Before booking</h2>
-<ul>
-  <li><strong>Book early.</strong> 2026/27 bookings are running about 70% above last year, and the
-      Stubai houses already show "1 left".</li>
-  <li><strong>March caveat.</strong> The Deutsches Eck line closes 8 Feb – 9 Jul 2027, pushing the
-      Nightjet arrival to ~09:29 and possibly rerouting. Verify before committing to March.</li>
-  <li><strong>Groups of 10+</strong> cannot book NS International online — it goes through the
-      group desk. Compare that quote against ten individual advance fares; advance fares often win.</li>
-  <li>Lift-pass prices and exact Nightjet fares for these dates are still estimates.</li>
-</ul>
+<h2>What the research found</h2>
+<div class="note"><strong>Short midweek stays are bookable after all.</strong> Chalet agencies are almost
+entirely Saturday-to-Saturday, which initially looked like a hard blocker. Booking.com and Airbnb inventory
+is not — every January price above is a real 3-night Thursday-to-Sunday quote.</div>
+<div class="note"><strong>Thursday–Sunday beats Friday–Monday.</strong> The same ski-slope chalet is €2,152
+on Thu–Sun against €2,689 on Fri–Mon — roughly €500 less for an extra ski day.</div>
+<div class="note"><strong>Check both platforms for the same house.</strong> The Neustift ski-slope chalet
+came back €2,466 vs €2,689 on one pair of dates and €2,286 vs €2,304 on another — the cheaper platform
+flipped. Booking also returned €2,445 and €2,689 for identical dates minutes apart. Treat any figure as ±10%.</div>
+<div class="note"><strong>No single Dolomites house for ten was bookable in any target week.</strong> That
+inventory is weekly and largely gone. The Val Gardena option above is two apartments in one building. At
+nine people a single 4-bedroom flat opens up at €59 pp/night.</div>
 
 <footer>
-  <p>Accommodation prices are live Booking.com quotes for 10 adults, Fri 22 – Mon 25 Jan 2027,
-  and live Airbnb totals for the same dates, for Thu 21 – Sun 24 Jan 2027, retrieved 19 November 2026, taxes as shown by each site. Booking.com prices are the signed-out rates; a Genius account may reduce them further. Rail times are from the 2027 timetable
-  (valid 13 Dec 2026 – 11 Dec 2027). Lift passes and Nightjet fares are estimates and are marked
-  as such. Prices move — re-check before booking.</p>
+<p>Accommodation: live Booking.com, Airbnb, MUSE and Chalet.nl quotes for 10 adults on the stated dates,
+retrieved 19 November 2026, taxes as shown by each site. Booking.com figures are signed-out rates — a Genius
+account may reduce them. Lift passes are official 2026/27 operator prices except Dolomiti Superski's season
+tier. Nightjet fares are published bands, not dated quotes: ÖBB's engine would not render. Drive times are
+OSRM road routing. Prices move — re-check before booking.</p>
 </footer>
-
 </main>
 </body>
 </html>
