@@ -327,6 +327,26 @@ color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space
 .lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
 .lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
 #none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
 </style>
 </head>
 <body>
@@ -369,40 +389,48 @@ excluded Saturday. Its only remaining bookable week is <b>Sat 27 Feb – Sat 6 M
 lift pass — dearer than January, and starting as the Dutch school holidays end, so busier.
 <br><br><b>Panorama-Ferienhaus loses its week-long option</b> and is now a short-stay choice only.</div>
 
-<h2>Airbnb, Salzburg catchment</h2>
-<p class="lede">Airbnb lists 37 whole homes for 10 adults under &ldquo;Schladming&rdquo; on these dates. It did
-not produce a better in-area option than the Booking.com inventory — its search radius is wide, and the cheap
-results are a long way from the lifts.</p>
-<div class="tbl-wrap"><table>
-<thead><tr><th>Airbnb listing</th><th class="num">3 nights</th><th class="num">€pp/n</th><th>Reviews</th><th>Distance to a 4-Berge lift</th></tr></thead><tbody>
-<tr><td>Ferienhaus Grimming, Diemlern</td><td class="num">€1,170</td><td class="num">€39</td><td>3</td><td><b>29 km</b> to Hauser Kaibling · 1.5 baths for 10</td></tr>
-<tr><td>Gorgeous Traditional Family House</td><td class="num">€1,340</td><td class="num">€45</td><td><b>4.97 from 176</b></td><td><b>56 km</b> — it is in Bad Aussee, not Schladming</td></tr>
-<tr><td>Detached villa with sauna, Donnersbachwald</td><td class="num">€1,509</td><td class="num">€50</td><td>4.8 from 5</td><td>side valley, not measured</td></tr>
-<tr><td>Chalet Hepi, Obertraun — 5 en-suite baths</td><td class="num">€1,703</td><td class="num">€57</td><td>5.0 from 3</td><td>Hallstatt area, not a 4-Berge base</td></tr>
-</tbody></table></div>
-<div class="note"><strong>The best-reviewed listing on Airbnb is not a ski base.</strong> &ldquo;Gorgeous
-Traditional Family House&rdquo; carries 4.97 from <b>176 reviews</b> — far more evidence than anything on
-Booking.com here — but it sits in Bad Aussee, <b>56 km and 47 minutes</b> from Hauser Kaibling. Airbnb's
-location label says Schladming; the measurement says otherwise. Same failure mode as Peerhof and Herzebenalm.
-<br><br><strong>Cross-platform check pays again.</strong> Landhaus Seraphine is listed on both:
-<b>€1,591 on Booking.com against €1,893 on Airbnb</b> for identical dates — Booking is <b>€302 cheaper</b> for
-the same house. Always price a shortlisted property on both.</div>
+<h2>Schladming ski bus — the actual network</h2>
+<p class="lede">Pulled from the operator, Planai-Hochwurzen Bahnen (planaibus.at), not from aggregators. Use
+these <b>stop names</b> to search accommodation: anything on a listed stop is car-free, anything else is not.
+<b>The ski bus is free with a valid ski pass.</b> Groups of 15+ must register with the bus company a day ahead.</p>
 
-<h2>Ski bus connectivity, Salzburg-area houses</h2>
+<h3>Line 900S — the valley trunk</h3>
+<p class="lede">Haus (Hauser Kaibling) → Schladming (Planai) → Pichl → Gleiming (Reiteralm) → Mandling.
+Roughly every 45 min, <b>08:15 to 17:15</b> from Haus Kaiblingbahn. Connects three of the four mountains.</p>
 <div class="tbl-wrap"><table>
-<thead><tr><th>House</th><th>Line</th><th>2026/27 timetable</th><th>Sunday</th><th>Verdict</th></tr></thead><tbody>
-<tr class="best"><td><b>Chalet Naila</b>, Bruck</td><td>Postbus 9386 → Kaprun Maiskogel</td><td><b>Published</b>, valid 20 Dec 2026 – 3 Apr 2027</td><td><b>Daily</b></td><td><b>Car-free, confirmed</b> — but only 2 morning runs (08:43, 09:51) and last return 16:45</td></tr>
-<tr><td><b>Alpen Chalet Eben</b></td><td>E1 Ortsrunde + A1 to Flachau</td><td>2025/26 only; 2026/27 not yet out</td><td>Probable, not stated</td><td>Car-free <b>marginal</b> — hourly, but <b>Moorgasse is not a listed stop</b></td></tr>
-<tr><td><b>Landhaus Seraphine</b>, Assachberg</td><td>Dörferbus Aich–Assach–Hauser Kaibling</td><td><b>None published</b>; 2025/26 PDF now 404s</td><td>Unverified</td><td><b>Car likely required</b> — no stop confirmed within 1 km, no times at all</td></tr>
+<thead><tr><th>Area</th><th>Stops on the line</th></tr></thead><tbody>
+<tr class="best"><td><b>Haus im Ennstal</b></td><td><b>Haus Kaiblingbahn</b> (lift base) · Haus Ost · Haus Ort · Haus West · Haus Oberhauser Straße</td></tr>
+<tr><td>Oberhaus / Lehen</td><td>Oberhaus Golfplatz · Oberhaus Ort · Oberhaus Kartatschergasse · Lehen Ort · Lehen Stögerhof</td></tr>
+<tr class="best"><td><b>Schladming</b></td><td>Schladming Ost · Pichlhof · <b>Planet Planai</b> · Rathausplatz · Roseggerstraße · Lendplatz · Planai West · Krankenhaus · Starchlhof · Salzburger Siedlung · Scheucher</td></tr>
+<tr><td>Pichl</td><td>Obere Klaus · Pichl Ort · Pichl Badesee · Pichl Volksschule</td></tr>
+<tr class="best"><td><b>Gleiming</b></td><td>Gleiming Abzw Forstau · <b>Gleiming Talstation Reiteralm</b> (lift base)</td></tr>
+<tr><td>Mandling</td><td>Mandling Warterdorf · Mandling Taferne <span class="sub">(2 runs/day only)</span></td></tr>
 </tbody></table></div>
-<div class="note"><strong>This reorders the three.</strong> Landhaus Seraphine is the cheapest house at €53
-pp/night, but it is the only one where the daily journey to the lifts is entirely unproven — and if a hire car
-is needed, roughly €35–50 per person lands on top, erasing its advantage over Chalet Naila.
-<br><br><strong>Chalet Naila is the only one that is demonstrably car-free</strong>, with a published 2026/27
-timetable running daily including Sundays. The cost is a timetable-bracketed ski day: last bus back at 16:45.
-That still fits the 20:30 Salzburg flight, with the 73-minute transfer leaving comfortable margin.
-<br><br><strong>Alpen Chalet Eben sits in between</strong> — an hourly free ski bus, but its own street is not
-on the published stop list, and only last season's timetable exists. One question to the host settles it.</div>
+
+<h3>Line 971 / 974 — Rohrmoos &amp; Untertal</h3>
+<p class="lede">Schladming → Rohrmoos → Untertal, roughly hourly, <b>07:20 to 17:30</b>. This is the Hochwurzen
+side. Note: from 8 Nov, Sunday and holiday services run <b>only when the lifts are operating</b> — fine in
+January, but it means no Sunday bus outside the ski season.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Area</th><th>Stops on the line</th></tr></thead><tbody>
+<tr><td>Schladming</td><td>Planet Planai · Rathausplatz · Roseggerstraße · <b>Bahnhof</b> · Lendplatz</td></tr>
+<tr class="best"><td><b>Rohrmoos</b></td><td>Götschl/Alpine · Schütterhof · Gästehaus Ahorn · <b>Rohrmoos-Dorf</b> · Rohrmoos-Zentrum · Schwaigerhof · Alpstegweg · <b>Talst. GIB Hochwurzen</b> (lift base) · Rohrmoos Süd · Seiterhof · Ahornweg</td></tr>
+<tr><td>Untertal</td><td>Untertal-Ort · Abzw Obertal · Hanglweg · Michlbauer · Untergladner · Janerbrücke · Hinkerbrücke · Tetter</td></tr>
+</tbody></table></div>
+
+<div class="note"><strong>This settles Landhaus Seraphine.</strong> The 900S runs along the valley floor
+through Haus and Oberhaus — <b>Assach and Aich are not stops on it</b>. Seraphine depends on the separate
+&ldquo;Dörferbus Aich–Assach–Hauser Kaibling&rdquo;, which has no published 2026/27 timetable and whose
+2025/26 PDF now 404s. So the cheapest house is the one genuinely off the network.
+<br><br><strong>Where to search instead, for a car-free trip:</strong> <b>Haus im Ennstal</b> (five stops,
+including the Hauser Kaibling base itself), <b>Rohrmoos</b> (eleven stops, including the Hochwurzen base),
+<b>Gleiming</b> (the Reiteralm base) and <b>Schladming</b> town (eleven stops, both lines). Those four cover
+three of the four mountains with a free bus at the door.
+<br><br><strong>Caveat:</strong> these are the pre-season timetables — 900S valid 5–17 Dec 2026, line 971
+valid 2 Nov – 17 Dec 2026. The <b>main-season 2026/27 timetables are not published yet</b>. Stop lists rarely
+change between seasons, but the times will; re-check in December.
+<br><br>Source: <a href="https://www.planaibus.at/de/regionalverkehr/fahrplan-auskunft" target="_blank" rel="noopener">planaibus.at timetables</a> ·
+<a href="https://www.planai.at/de/aktivitaeten/skifahren/skibus" target="_blank" rel="noopener">Planai ski bus</a></div>
 
 <h2>Travel combinations, ranked by ski days</h2>
 <p class="lede">Flight fares are 9-passenger block quotes ÷ 9, carry-on only with kit rented on arrival.
