@@ -92,6 +92,16 @@ td{padding:9px 11px;border-top:1px solid var(--border);background:var(--surface)
 tr.best td{background:#12201b}
 footer{border-top:1px solid var(--border);margin-top:36px;padding-top:15px;color:var(--muted);font-size:11.5px}
 @media(max-width:560px){main{padding:16px 12px 50px}.img-strip img{height:96px}.rgrid{grid-template-columns:1fr}}
+
+.costs{background:#141c17}
+table.cost{width:100%;border-collapse:collapse;margin-top:7px;min-width:0}
+table.cost td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0;font-size:12px}
+table.cost tr:first-child td{border-top:none}
+table.cost td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:10px;width:1%}
+table.cost td.src{color:var(--muted);font-size:10.5px;padding-left:12px;text-align:right;width:40%}
+table.cost tr.tot td{border-top:1px solid var(--border2);color:var(--green);font-size:13px}
+table.cost tr.tot td.src{color:var(--muted);font-weight:400}
+@media(max-width:560px){table.cost td.src{display:none}}
 </style>
 </head>
 <body>
@@ -142,7 +152,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 4 days <b>€267.90</b> — glacier + Schlick 2000 + Serles + Elfer</div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈14 h overnight + ~45 min bus</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">Glacier on the same pass — snow is not in question in either window</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€595–665</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>House, €1,659 ÷ 10</td><td class="num">€165.90</td><td class="src">confirmed quote</td></tr><tr><td>Nightjet Amsterdam ↔ Innsbruck, couchette</td><td class="num">€110–230</td><td class="src">band, not a dated quote — ÖBB's engine would not render</td></tr><tr><td>Bus Innsbruck ↔ valley, €4.70 each way</td><td class="num">€9.40</td><td class="src">in-valley buses free with ski pass or ski gear</td></tr><tr><td>Stubai Skipass, 4 days</td><td class="num">€267.90</td><td class="src">official 2026/27 price</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€553–673</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-stubai-glacier">Stubaier Gletscher <b>65 km</b></a> <a class="rchip" href="#r-schlick">Schlick 2000 <b>25 km</b></a> <a class="rchip" href="#r-elfer">Elferlifte Neustift <b>2.5 km</b></a></div>
   <div class="perks"><span class="perk">Ski storage</span><span class="perk">Free valley ski bus</span></div>
@@ -167,7 +177,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 4 days <b>€267.90</b></div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈14 h overnight + ~50 min bus</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag mid">Moderate</span></div><div class="s">Doorstep hill is low (982–1,750 m); the reliable skiing is a bus ride up the valley</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€620–690</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>House, €1,944 ÷ 10</td><td class="num">€194.40</td><td class="src">confirmed quote</td></tr><tr><td>Nightjet Amsterdam ↔ Innsbruck, couchette</td><td class="num">€110–230</td><td class="src">band, not a dated quote — ÖBB's engine would not render</td></tr><tr><td>Bus Innsbruck ↔ Mieders, €4.70 each way</td><td class="num">€9.40</td><td class="src">free on SKI plus CITY; in-valley free with pass or gear</td></tr><tr><td>Stubai Skipass, 4 days</td><td class="num">€267.90</td><td class="src">official 2026/27 price</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€582–702</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-serles">Serlesbahnen Mieders <b>5.7 km</b></a> <a class="rchip" href="#r-schlick">Schlick 2000 <b>25 km</b></a> <a class="rchip" href="#r-stubai-glacier">Stubaier Gletscher <b>65 km</b></a></div>
   <div class="perks"><span class="perk">Sauna</span><span class="perk">5 bathrooms</span><span class="perk">Mountain view</span><span class="perk">Barbecue</span><span class="perk">Free valley ski bus</span></div>
@@ -192,7 +202,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v">Stubai Skipass 6 days <b>€355</b></div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Nightjet couchette ≈ €150–220 return</div><div class="s">≈14 h overnight + ~45 min bus</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">March needs the glacier — which this pass covers</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€825–895</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>House, €3,102 ÷ 10</td><td class="num">€310.20</td><td class="src">confirmed quote</td></tr><tr><td>Nightjet Amsterdam ↔ Innsbruck, couchette</td><td class="num">€110–230</td><td class="src">band, not a dated quote — ÖBB's engine would not render</td></tr><tr><td>Bus Innsbruck ↔ valley, €4.70 each way</td><td class="num">€9.40</td><td class="src">in-valley buses free with ski pass or ski gear</td></tr><tr><td>Stubai Skipass, 6 days</td><td class="num">€355.00</td><td class="src">official 2026/27 price</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€785–905</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-stubai-glacier">Stubaier Gletscher <b>65 km</b></a> <a class="rchip" href="#r-schlick">Schlick 2000 <b>25 km</b></a> <a class="rchip" href="#r-elfer">Elferlifte Neustift <b>2.5 km</b></a></div>
   <div class="perks"><span class="perk">Ski storage</span><span class="perk">Free valley ski bus</span><span class="perk">Lowest €/night of the season</span></div>
@@ -217,7 +227,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v">Dolomiti Superski 6 days <b>€407</b> — late Jan is the cheaper tier; mid-March is high season at €453</div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Nightjet + Brenner train + bus ≈ €200–290 return</div><div class="s">≈20 h door to door</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag mid">Moderate</span></div><div class="s">No glacier and a modest top station; heavy snowmaking carries it, but March softens</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€1,090–1,180</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>Two apartments, €4,816 ÷ 10</td><td class="num">€481.60</td><td class="src">confirmed quote</td></tr><tr><td>Nightjet Amsterdam ↔ Innsbruck, couchette</td><td class="num">€110–230</td><td class="src">band, not a dated quote — ÖBB's engine would not render</td></tr><tr><td>Brenner train Innsbruck ↔ Bolzano</td><td class="num">€50–80</td><td class="src">indicative; 2027 fares not published</td></tr><tr><td>Bus 350 Bolzano ↔ Ortisei, €6 each way</td><td class="num">€12.00</td><td class="src">timetable 2025/26, winter 2026/27 unconfirmed</td></tr><tr><td>Local ski bus</td><td class="num">€0.00</td><td class="src">free with the Val Gardena Guest Pass</td></tr><tr><td>Dolomiti Superski, 6 days</td><td class="num">€407.00</td><td class="src">season tier — late Jan. Mid-March is €453</td></tr><tr><td>Local tourist tax, ~€3 per night</td><td class="num">~€21.00</td><td class="src">MUSE states tax not included; per-night basis unconfirmed</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€1,082–1,232</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-valgardena">Val Gardena / Gröden <b>181 km</b></a></div>
   <div class="perks"><span class="perk">Sella Ronda</span><span class="perk">50 m to the lift</span><span class="perk">Dolomiti Superski</span><span class="perk">Ski bus at the door</span></div>
@@ -242,7 +252,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v">Silvretta Skipass 4 days <b>€315</b> (Ischgl + Kappl + Galtür + See) · Kappl &amp; See only <b>€260</b></div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Nightjet to Landeck-Zams + bus ≈ €150–220 return</div><div class="s">≈14 h overnight + ~40 min bus</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">High</span></div><div class="s">Kappl tops at 2,618 m and Ischgl at 2,872 m — both reliable in January and March</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€675–745</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>House, €2,100 ÷ 10</td><td class="num">€210.00</td><td class="src">confirmed quote</td></tr><tr><td>Nightjet Amsterdam ↔ Landeck-Zams, couchette</td><td class="num">€110–230</td><td class="src">band, not a dated quote</td></tr><tr><td>Bus Landeck-Zams ↔ Kappl</td><td class="num">~€12.00</td><td class="src"><b>unverified</b> — VVT fare not confirmed</td></tr><tr><td>Ski bus Kappl ↔ Ischgl</td><td class="num">€0.00</td><td class="src">free with ski pass plus ski gear</td></tr><tr><td>Silvretta Skipass, 4 days</td><td class="num">€315.00</td><td class="src">Kappl &amp; See only would be €260</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€647–767</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table><div class="s">Using the Kappl &amp; See pass instead of the full Silvretta drops the total to €592–712, but gives up Ischgl's 239 km.</div></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-kappl">Kappl <b>45.5 km</b></a> <a class="rchip" href="#r-ischgl">Silvretta Arena Ischgl–Samnaun <b>239 km</b></a></div>
   <div class="perks"><span class="perk">Ischgl on the same pass</span><span class="perk">5 bedrooms</span><span class="perk">Free ski bus</span></div>
@@ -267,7 +277,7 @@ is a full Sat–Sat week or nothing. 9 h 17 m, one train, no night travel.</div>
     <div class="m"><div class="k">Lift pass</div><div class="v"><b>Included</b> — 6-day Les Arcs pass, plus linen, cleaning, water and tourist tax</div></div>
     <div class="m"><div class="k">Travel</div><div class="v">Eurostar Snow direct ≈ €130–190 return</div><div class="s"><b>9 h 17 m, one direct train</b> — no night travel</div></div>
     <div class="m"><div class="k">Snow certainty</div><div class="v"><span class="tag good">Very high</span></div><div class="s">70% of Paradiski is above 2,000 m with two glaciers above 3,000 m — the most reliable here</div></div>
-    <div class="m"><div class="k">Total per person</div><div class="v price">€1,290–1,350</div><div class="s">excl. food</div></div>
+    <div class="m wide costs"><div class="k">What the total per person covers</div><table class="cost"><tbody><tr><td>Package, incl. 6-day Les Arcs pass, linen, cleaning, water, tourist tax</td><td class="num">€1,160.00</td><td class="src">confirmed quote, chalet.nl</td></tr><tr><td>Eurostar Snow Amsterdam ↔ Bourg-Saint-Maurice</td><td class="num">€130–190</td><td class="src">&ldquo;from €65&rdquo; each way; dated fare not retrieved</td></tr><tr><td>Transfer to Vallandry</td><td class="num">€0–20</td><td class="src"><b>unverified</b> — no 2026/27 shuttle timetable found</td></tr><tr><td>Lift pass</td><td class="num">€0.00</td><td class="src">already included in the package above</td></tr><tr class="tot"><td><b>Total per person</b></td><td class="num"><b>€1,290–1,370</b></td><td class="src">excludes food, ski hire, insurance</td></tr></tbody></table></div>
   </div>
   <div class="rchips"><a class="rchip" href="#r-lesarcs">Les Arcs / Peisey-Vallandry <b>200 km</b></a></div>
   <div class="perks"><span class="perk">Private spa</span><span class="perk">Sauna</span><span class="perk">Turkish steam room</span><span class="perk">Open fire</span><span class="perk">Car-free park</span><span class="perk">Lift pass included</span></div>
@@ -431,6 +441,10 @@ that do not appear to offer Genius rates.</div>
 carry <b>free cancellation to 22 December with nothing to pay until 20 December</b>. For a group of ten, where
 someone usually drops out, the €285 premium for a cancellable booking you can hold while the group firms up is
 likely worth paying.</div>
+<div class="note"><strong>What the totals leave out.</strong> Every total on this page excludes
+food and drink, ski and boot hire (roughly €100–150 per person per week), lessons, travel insurance, and your
+own transport to Amsterdam Centraal. Lift passes and local buses are exact 2026/27 operator prices; the train
+is the only genuinely uncertain line, because ÖBB's booking engine would not render for dated fares.</div>
 <div class="note"><strong>No single Dolomites house for ten was bookable in any target week.</strong> That
 inventory is weekly and largely gone. The Val Gardena option is two apartments in one building.</div>
 
