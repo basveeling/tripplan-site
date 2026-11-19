@@ -347,6 +347,26 @@ color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space
 .lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
 .lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
 #none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
 </style>
 </head>
 <body>
@@ -418,8 +438,10 @@ January, but it means no Sunday bus outside the ski season.</p>
 <tr><td>Untertal</td><td>Untertal-Ort · Abzw Obertal · Hanglweg · Michlbauer · Untergladner · Janerbrücke · Hinkerbrücke · Tetter</td></tr>
 </tbody></table></div>
 
-<div class="note"><strong>This settles Landhaus Seraphine.</strong> The 900S runs along the valley floor
-through Haus and Oberhaus — <b>Assach and Aich are not stops on it</b>. Seraphine depends on the separate
+<div class="note"><strong>This settles Landhaus Seraphine.</strong> The published (pre-season) 900S runs
+Haus → Mandling only. In the main season OpenStreetMap shows it extending east to Gröbming, with a stop at
+<b>Aich im Ennstal Bundesstraße</b> — but Seraphine's hillside at Assach-Oberdorf is <b>1.6 km</b> from that
+stop, uphill. Seraphine depends on the separate
 &ldquo;Dörferbus Aich–Assach–Hauser Kaibling&rdquo;, which has no published 2026/27 timetable and whose
 2025/26 PDF now 404s. So the cheapest house is the one genuinely off the network.
 <br><br><strong>Where to search instead, for a car-free trip:</strong> <b>Haus im Ennstal</b> (five stops,
@@ -431,6 +453,44 @@ valid 2 Nov – 17 Dec 2026. The <b>main-season 2026/27 timetables are not publi
 change between seasons, but the times will; re-check in December.
 <br><br>Source: <a href="https://www.planaibus.at/de/regionalverkehr/fahrplan-auskunft" target="_blank" rel="noopener">planaibus.at timetables</a> ·
 <a href="https://www.planai.at/de/aktivitaeten/skifahren/skibus" target="_blank" rel="noopener">Planai ski bus</a></div>
+
+<h2>Searching against the stops</h2>
+<p class="lede">Instead of searching village names, Booking.com was searched <b>centred on each of 16 stops</b>
+(lines 900S, 971/974, 965B, 960), entire places only, 10 adults, 21–24 Jan, sorted by distance from the stop.
+Airbnb was searched by map box over the valley, and each listing's coordinates measured against every stop.</p>
+<div class="tbl-wrap"><table>
+<thead><tr><th>Property</th><th class="num">To stop</th><th>Stop (line)</th><th>What it actually is</th></tr></thead><tbody>
+<tr><td>Apartments Sopherl, Aich</td><td class="num">100 m</td><td>Aich Bundesstraße (900S, main season)</td><td>3-bed apartment, <b>max 6</b>, 1 left</td></tr>
+<tr><td>BASECAMP Reiteralm, Gleiming</td><td class="num">300 m</td><td>Gleiming Talstation Reiteralm (900S)</td><td>2-bed apartment, <b>max 6</b>, 1 left</td></tr>
+<tr><td>Sissi Park, Haus im Ennstal</td><td class="num">300 m</td><td>Haus Ort (900S)</td><td>aparthotel units</td></tr>
+<tr><td>Auerhof, Schladming</td><td class="num">450 m</td><td>Untertal Seiterhof (971)</td><td>2-bed apartment, <b>max 4</b>, 1 left</td></tr>
+<tr><td>Appartmenthaus Martina, Haus</td><td class="num">600 m</td><td>Haus Ort (900S)</td><td>apartment, <b>max 6</b>, 1 left</td></tr>
+<tr><td>Kainreiterhof, Aich</td><td class="num">700 m</td><td>Aich Bundesstraße (900S)</td><td>2-bed apartment, <b>max 4</b>, 1 left</td></tr>
+<tr class="best"><td><b>The Villa – Glücksthaler</b>, Aich <span class="sub">Airbnb</span></td><td class="num"><b>680 m</b></td><td>Aich Bundesstraße (900S)</td><td><b>Whole house</b>, 10 guests, 4 bed, 4.5 bath, 4.93 (28) — <b>€3,820 = €127 pp/night</b></td></tr>
+<tr><td>Chalet Glauninger, Ramsau Vorberg</td><td class="num">470 m</td><td>Ramsau Vorberg Jager (960 variant)</td><td>Whole house — but <b>the regular 960 does not run via Vorberg</b>; only a school-bus variant does</td></tr>
+<tr><td>Landhaus Seraphine, Assach</td><td class="num">1.6 km</td><td>Aich Bundesstraße (900S)</td><td>Whole house, uphill — off the network</td></tr>
+</tbody></table></div>
+<div class="note" style="border-left-color:var(--red)"><strong>Result: there is no affordable whole house for
+ten within walking distance of a ski-bus stop on 21–24 January.</strong>
+<br><br>Everything close to the buses is a <b>single apartment sleeping 4–6</b>. Booking's search cards quote a
+price &ldquo;for 10&rdquo;, but the property pages show that figure combines units — and every one of these shows
+<b>&ldquo;We have 1 left&rdquo;</b>, so a second matching unit may not exist. A group of ten near a stop means
+2–3 apartments, probably in different buildings.
+<br><br>The <b>only whole house near a stop</b> that is free on these dates is <b>The Villa – Glücksthaler</b>
+in Aich: 680 m from the Aich Bundesstraße stop, four bedrooms and 4.5 bathrooms, rated 4.93 — but at
+<b>€127 per person per night it breaks the €100 ceiling</b>, and its stop is on the main-season extension of the
+900S that is not yet published.
+<br><br><strong>Chalet Glauninger does not come back.</strong> OpenStreetMap places three stops within ~500 m of
+it, but RVB's own timetable shows the regular line 960 running Ramsau Ort → Kulm → Leiten → Schladming, not
+through Vorberg; Vorberg appears only on the school-bus run. Winter service to Vorberg (lines 962/8605) has no
+published 2026/27 timetable.
+<br><br>Airbnb within the valley box returned just <b>two</b> homes free on 21–24 Jan (the Villa and
+Seraphine). The best stop-adjacent chalets in Haus/Ennsling — one 166 m from the Ennsling stop — are free only
+on shifted dates (Wed 20–Sat 23), where flights cost €538 and the chalets €143–175 pp/night.
+<br><br><strong>So the real choice is:</strong> one house with a car (Seraphine, Glauninger, Eben, Naila), or
+the bus with split apartments — or Chalet Naila, the one house with a confirmed daily ski bus, at Kaprun.
+<br><br>Sources: <a href="https://www.planaibus.at/de/regionalverkehr/fahrplan-auskunft" target="_blank" rel="noopener">planaibus.at</a> ·
+<a href="https://www.rvb.at/de/dachstein-bus-reisen/fahrplan-linie.html" target="_blank" rel="noopener">RVB Ramsau timetable</a> · OpenStreetMap route relations</div>
 
 <h2>Travel combinations, ranked by ski days</h2>
 <p class="lede">Flight fares are 9-passenger block quotes ÷ 9, carry-on only with kit rented on arrival.
