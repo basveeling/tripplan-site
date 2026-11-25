@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Last-minute ski · December 2026</title>
+<style>
+h3{font-size:14px;font-weight:700;margin:22px 0 6px;color:var(--cyan)}
+
+:root{--bg:#0d1117;--surface:#161b22;--surface2:#1e2533;--border:#2a3245;--border2:#374160;
+--text:#e2e8f0;--muted:#7c8db0;--accent:#818cf8;--green:#34d399;--yellow:#fbbf24;--red:#f87171;--cyan:#22d3ee;--blue:#60a5fa;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;font-size:13px;line-height:1.55}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+header{position:sticky;top:0;z-index:100;background:var(--surface);border-bottom:1px solid var(--border);
+padding:10px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+header h1{font-size:16px;font-weight:700;white-space:nowrap}
+.header-meta{color:var(--muted);font-size:12px}header .spacer{flex:1}
+main{max-width:980px;margin:0 auto;padding:20px 16px 70px}
+.lede{color:var(--muted);font-size:14px;margin-bottom:16px}
+h2{font-size:17px;font-weight:700;margin:32px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);scroll-margin-top:60px}
+p{margin:8px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.card-header{padding:14px 16px 10px;display:flex;align-items:flex-start;gap:12px}
+.rank{min-width:32px;height:32px;border-radius:8px;background:var(--surface2);display:flex;align-items:center;
+justify-content:center;font-size:13px;font-weight:700;color:var(--muted);flex-shrink:0}
+.rank.top3{background:#2d2a1a;color:var(--yellow)}
+.card-title-row{flex:1;min-width:0}
+.card-name{font-size:15px;font-weight:700;color:var(--text)}.card-name:hover{color:var(--accent)}
+.card-region{color:var(--muted);font-size:12px;margin-top:1px}
+.card-shape{color:var(--cyan);font-size:12px;margin-top:3px}
+.card-score{font-size:22px;font-weight:800;color:var(--green);flex-shrink:0;line-height:1;margin-top:2px;text-align:right}
+.card-score span{display:block;font-size:11px;color:var(--muted);font-weight:400;margin-top:3px}
+.img-strip{display:flex;gap:4px;overflow-x:auto;padding:0 16px 10px}
+.img-strip img{height:118px;width:auto;border-radius:6px;flex-shrink:0;object-fit:cover}
+.card-tagline{margin:0 16px 10px;display:inline-block;background:#1a2733;color:var(--cyan);border:1px solid #24394a;
+font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:1px;background:var(--border);
+border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.m{background:var(--surface);padding:10px 14px}.m.wide{grid-column:1/-1}
+.m.hilite{background:#141f1b}
+.m .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.m .v{font-size:13px;margin-top:3px}.m .v.price{font-size:15px;font-weight:750;color:var(--green)}
+.m .s{font-size:11px;color:var(--muted);margin-top:4px}
+.conn{line-height:1.5}
+.warn-ital{color:var(--yellow);font-style:italic}
+.rchips{padding:10px 16px 0;display:flex;flex-wrap:wrap;gap:5px}
+.rchip{font-size:11px;background:#19202c;border:1px solid var(--border2);color:var(--text);padding:3px 9px;border-radius:20px}
+.rchip b{color:var(--cyan)}
+.rchip .t{color:var(--muted)}
+.rchips{gap:6px}
+.rchip{line-height:1.45;max-width:100%}
+.perks{padding:8px 16px 0;display:flex;flex-wrap:wrap;gap:5px}
+.perk{font-size:11px;background:var(--surface2);border:1px solid var(--border2);color:var(--muted);padding:2px 8px;border-radius:20px}
+.card-note{padding:10px 16px 0;font-size:12.5px}
+.card-foot{padding:9px 16px 13px;color:var(--muted);font-size:11px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;margin-left:6px}
+.tag.good{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.tag.mid{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+.tag.bad{background:#301a1a;color:var(--red);border:1px solid #4a1d1d}
+.sub{color:var(--muted);font-size:11px;font-weight:400}
+/* resort cards */
+.rgridwrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px}
+.rcard{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:13px 15px;scroll-margin-top:60px}
+.rcard:target{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.rhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.rname{font-size:14px;font-weight:700}.rsub{font-size:11px;color:var(--muted);margin-top:1px}
+.rkm{font-size:17px;font-weight:800;color:var(--cyan);white-space:nowrap}
+.bar{display:flex;height:9px;border-radius:5px;overflow:hidden;margin:11px 0 7px;background:var(--surface2)}
+.seg.blue{background:var(--blue)}.seg.red{background:var(--red)}.seg.black{background:#64748b}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted)}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
+.legend i.blue{background:var(--blue)}.legend i.red{background:var(--red)}.legend i.black{background:#64748b}
+.rextra{font-size:11px;color:var(--muted);margin-top:6px;font-style:italic}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin-top:11px}
+.rgrid .k{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.rgrid .v{font-size:12px;margin-top:1px}
+.rnote{font-size:11.5px;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--border)}
+.rlink{display:inline-block;margin-top:8px;font-size:11.5px}
+/* misc */
+.rail{display:flex;flex-wrap:wrap;margin:14px 0;border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.rail div{flex:1 1 125px;padding:10px 13px;background:var(--surface);border-right:1px solid var(--border)}
+.rail div:last-child{border-right:none}
+.rail .d{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;font-weight:700}
+.rail .v{font-size:14px;font-weight:650;margin-top:3px}.rail .n{font-size:11px;color:var(--muted);margin-top:2px}
+.note{border-left:3px solid var(--border2);padding:2px 0 2px 13px;color:var(--muted);margin:11px 0}
+.note strong{color:var(--text)}
+.rej{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--red);
+border-radius:8px;padding:11px 14px;margin-bottom:9px}
+.rej .n{font-weight:700;font-size:13px}.rej .w{font-size:11px;color:var(--muted);margin-top:1px}
+.rej .b{font-size:12.5px;color:var(--muted);margin-top:6px}
+.tbl-wrap{overflow-x:auto;margin:12px 0;border:1px solid var(--border);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:12.5px}
+th{background:var(--surface2);text-align:left;padding:8px 11px;font-size:10px;text-transform:uppercase;
+letter-spacing:.06em;color:var(--muted);font-weight:700;white-space:nowrap}
+td{padding:9px 11px;border-top:1px solid var(--border);background:var(--surface)}
+tr.best td{background:#12201b}
+footer{border-top:1px solid var(--border);margin-top:36px;padding-top:15px;color:var(--muted);font-size:11.5px}
+@media(max-width:560px){main{padding:16px 12px 50px}.img-strip img{height:96px}.rgrid{grid-template-columns:1fr}}
+
+.costs{background:#141c17}
+table.cost{width:100%;border-collapse:collapse;margin-top:7px;min-width:0}
+table.cost td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0;font-size:12px}
+table.cost tr:first-child td{border-top:none}
+table.cost td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:10px;width:1%}
+table.cost td.src{color:var(--muted);font-size:10.5px;padding-left:12px;text-align:right;width:40%}
+table.cost tr.tot td{border-top:1px solid var(--border2);color:var(--green);font-size:13px}
+table.cost tr.tot td.src{color:var(--muted);font-weight:400}
+@media(max-width:560px){table.cost td.src{display:none}}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+.gf{white-space:nowrap;font-size:11.5px;margin-left:4px}
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+.gf{white-space:nowrap;font-size:11.5px;margin-left:4px}
+#filters{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:12px 15px;
+margin:14px 0;display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end}
+.fg{display:flex;flex-direction:column;gap:5px}
+.fg>label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.chiprow{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:3px 11px;border-radius:20px;border:1px solid var(--border2);background:transparent;
+color:var(--muted);font-size:12px;cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff}
+#count{color:var(--muted);font-size:12px;margin-left:auto}
+.wtab{width:100%;border-collapse:collapse;margin-top:7px;font-size:12px}
+.wtab td{background:transparent;border:none;border-top:1px solid var(--border);padding:5px 0}
+.wtab tr:first-child td{border-top:none}
+.wtab td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.wtab td.sold{color:var(--red)}
+.wtab tr.hit td{color:var(--green)}
+.lay{font-size:10px;font-weight:700;padding:2px 7px;border-radius:20px;margin-left:7px}
+.lay.house{background:#12301f;color:var(--green);border:1px solid #1d4a31}
+.lay.apartments{background:#2d2a1a;color:var(--yellow);border:1px solid #4a431d}
+#none{text-align:center;padding:40px;color:var(--muted);display:none}
+
+.hero-note{background:#16202c;border:1px solid #24394a;border-radius:12px;padding:12px 15px;margin:12px 0;color:var(--text)}
+.opt-k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700}
+.staytab td,.staytab th{font-size:12px}
+.tag.grey{background:#1e2533;color:var(--muted);border:1px solid var(--border2)}
+.bar.np{background:repeating-linear-gradient(45deg,#1e2533,#1e2533 6px,#232b3b 6px,#232b3b 12px)}
+.gf{white-space:nowrap;font-size:11.5px;margin-left:4px}
+</style>
+</head>
+<body>
+<header><h1>❄️ Last-minute ski · Dec 2026</h1><span class="header-meta">4 people · fly from AMS / EIN / RTM · cute stay, sauna or hot tub a plus</span>
+<div class="spacer"></div><span class="header-meta">researched 25 Nov 2026</span></header><main>
+<p class="lede">A spontaneous 3–7 day ski trip after the big November snowfalls, fitted around fixed dates at home.
+Main focus: <b>next week, Mon 30 Nov → Fri 4 Dec</b> (home by Sat 5 Dec 11:00). Later windows are below.</p>
+<h2>Your windows</h2><div class="tbl-wrap"><table><thead><tr><th>Window</th><th>Dates</th><th>Ski days</th><th>Status</th></tr></thead><tbody>
+<tr class="best"><td><b>A — next week</b></td><td>Mon 30 Nov → Fri 4 Dec (or Sat 5 Dec early)</td><td class="num">3.5–4</td><td>Dry, sunny week. Innsbruck &amp; Salzburg have no flights yet — fly Milan, Munich or Geneva.</td></tr>
+<tr><td>B</td><td>Sun 6 Dec → Sat 12 Dec</td><td class="num">≈6</td><td>Big snow forecast for northern Austria 5–10 Dec; cheap Innsbruck flights.</td></tr>
+<tr><td>C</td><td>Mon 14 Dec → Fri 18 Dec</td><td class="num">≈3.5</td><td>Quietest week; everything open incl. Les Arcs.</td></tr>
+<tr><td><s>D</s></td><td>Sun 20 → Wed 23 Dec</td><td class="num">3</td><td class="sub">Skipped — Christmas-holiday prices and crowds.</td></tr>
+</tbody></table></div>
+<h2>Where the snow is</h2>
+<p class="lede">Modelled snow depth at mid-mountain today, plus new snow forecast. Two models (ICON, ECMWF) shown because they disagree in places.</p>
+<div class="tbl-wrap"><table><thead><tr><th>Resort</th><th class="num">Depth now</th><th class="num">New snow 30 Nov–4 Dec</th><th class="num">New snow 5–10 Dec</th><th class="num">Valley rain, 16 days</th></tr></thead><tbody>
+<tr class="best"><td><b>Val d'Isère / Tignes</b></td><td class="num">1.0–1.2 m</td><td class="num">0</td><td class="num">2–4 cm</td><td class="num">0–1 mm</td></tr>
+<tr class="best"><td><b>Cervinia</b></td><td class="num">0.8–2.1 m</td><td class="num">0</td><td class="num">4 cm</td><td class="num">0 mm</td></tr>
+<tr><td>Zermatt</td><td class="num">0.7–2.1 m</td><td class="num">0</td><td class="num">4 cm</td><td class="num">2 mm</td></tr>
+<tr><td>Les Arcs <span class="sub">(opens 12 Dec)</span></td><td class="num">0.9–1.2 m</td><td class="num">2 cm</td><td class="num">5 cm</td><td class="num">6 mm</td></tr>
+<tr><td>Val Thorens</td><td class="num">0.5–0.8 m</td><td class="num">2 cm</td><td class="num">3 cm</td><td class="num">4 mm</td></tr>
+<tr><td>Stubai Glacier</td><td class="num">0.2–0.4 m</td><td class="num">0</td><td class="num">42 cm</td><td class="num">3 mm</td></tr>
+<tr><td>Sölden</td><td class="num">0.2–0.3 m</td><td class="num">0</td><td class="num">37 cm</td><td class="num">23 mm</td></tr>
+<tr class="best"><td><b>Kühtai</b></td><td class="num">0–0.25 m</td><td class="num">0</td><td class="num"><b>39 cm</b></td><td class="num">1 mm</td></tr>
+<tr><td>Lech-Zürs</td><td class="num">0.2–0.3 m</td><td class="num">0</td><td class="num">54 cm</td><td class="num">7 mm</td></tr>
+</tbody></table></div>
+<div class="note"><strong>The pattern:</strong> the western Alps (Savoie, Valais, Aosta) got the big November storms and have the deep base.
+<b>Next week is dry everywhere</b> — sunny skiing on whatever is already down, which favours the west. Around 5–10 Dec a storm is forecast
+mainly for northern Austria, which is why Kühtai looks better for windows B and C than for next week. That storm is 10–15 days out:
+a signal, not a promise.</div>
+<h2 id="next-week">Next week: Mon 30 Nov → Fri 4 Dec</h2>
+<div class="card"><div class="card-header"><div class="rank top3">1</div><div class="card-title-row">
+<div class="card-name">Cervinia / Valtournenche</div><div class="card-region">Aosta Valley, Italy · fly Milan</div><div class="card-shape">Mon 30 Nov → Fri 4 Dec · 4 nights · <b>≈3.5 ski days</b></div></div>
+<div class="card-score">≈€770<span>pp all-in</span></div></div><div class="img-strip"><img src="images/lastminute/grene-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/grene-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/grene-3.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/nido-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/nido-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/nido-3.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/cervinia-house-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/cervinia-house-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/cervinia-house-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="card-tagline">Best snow you can reach cheaply</div>
+<div class="metrics"><div class="m wide"><div class="k">Flights</div><div class="v conn"><b>Amsterdam → Milan Malpensa</b> Mon 30 Nov 09:45–11:25 (€174) · <b>back</b> Fri 4 Dec 18:20–20:20 (€124) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTEtMzBqBRIDQU1TcgUSA01YUBoaEgoyMDI2LTEyLTA0agUSA01YUHIFEgNBTVNCBAEBAQFIAZgBAQ%3D%3D&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a><br>or from Eindhoven: EIN → Bergamo Mon 11:15–12:45 (€91) · back Fri 15:55–17:40 (€172) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTEtMzBqBRIDRUlOcgUSA0JHWRoaEgoyMDI2LTEyLTA0agUSA0JHWXIFEgNFSU5CBAEBAQFIAZgBAQ%3D%3D&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a></div></div>
+<div class="m wide hilite"><div class="k">Airport → slopes</div><div class="v conn"><b>Hire car needed</b> — Malpensa → Valtournenche ≈2h15 (Bergamo ≈2h45). Winter tyres or chains are mandatory in the Aosta Valley. No weekday airport bus reaches Cervinia. Every chalet below is 3–7 min by car from the Valtournenche gondola, which links up into Cervinia.</div></div>
+<div class="m wide"><div class="k">Where to stay — 4 people</div><div class="tbl-wrap"><table class="staytab"><thead><tr><th>Stay</th><th>What it is</th><th>Wellness</th><th class="num">Total</th><th class="num">pp</th></tr></thead><tbody><tr class=best><td><a href="https://www.airbnb.com/rooms/46560548" target="_blank" rel="noopener">Grené de Singlin</a> <span class="sub">Airbnb</span></td><td>Entire chalet · 2 bedrooms · fireplace · rated 4.96</td><td>—</td><td class="num">€720</td><td class="num">€180</td></tr><tr><td><a href="https://www.airbnb.com/rooms/47745730" target="_blank" rel="noopener">Nido Alpino</a> <span class="sub">Airbnb</span></td><td>Entire cabin · 2 bedrooms · fireplace · rated 4.99</td><td>—</td><td class="num">€785</td><td class="num">€196</td></tr><tr><td><a href="https://www.airbnb.com/rooms/1413815" target="_blank" rel="noopener">Chalet Walser, Champlève</a> <span class="sub">Airbnb</span></td><td>Entire chalet · 2 bedrooms · fireplace · rated 4.76</td><td>—</td><td class="num">€750</td><td class="num">€188</td></tr><tr><td><a href="https://www.booking.com/hotel/it/cerviniahouse.en-gb.html" target="_blank" rel="noopener">Cervinia House – Alpine Apartments</a> <span class="sub">Booking</span></td><td>1 bedroom + sofa bed · rated 9.2 (54) · 2-bed house only on a 5-night stay (€1,213)</td><td><b>Hot tub</b></td><td class="num">€780</td><td class="num">€195</td></tr></tbody></table></div></div>
+<div class="m wide costs"><div class="k">What it costs</div><table class="cost"><tbody><tr><td>Flights AMS ↔ Malpensa</td><td class="num">€298</td><td class="src">Google Flights, 4 pax</td></tr><tr><td>Hire car, 5 days</td><td class="num">≈€40–60</td><td class="src">estimate, not quoted</td></tr><tr><td>Grené de Singlin, 4 nights</td><td class="num">€180</td><td class="src">Airbnb, live price</td></tr><tr><td>Lift pass Cervinia–Valtournenche, 4 days</td><td class="num">€235.50</td><td class="src">2026/27 tariff</td></tr><tr class="tot"><td><b>Total per person (4 people)</b></td><td class="num"><b>≈€755–775</b></td><td class="src">excl. food, ski hire</td></tr></tbody></table></div></div>
+<div class="rchips"><a class="rchip" href="#r-cervinia">Breuil-Cervinia / Valtournenche <b>≈104–160 km</b></a> <a class="rchip" href="#r-matterhorn">Matterhorn Ski Paradise (with Zermatt) <b>322 km</b></a></div><div class="card-note">Deepest base reachable on cheap flights, glacier above 3,000 m, and a dry sunny week. Hot tubs are scarce here: the Airbnb hot-tub filter returns only 4 homes, all €1,600+ and rated ≤4.5, so the hot-tub pick is Cervinia House on Booking. <b>The Zermatt link was closed on 25 Nov</b> — buy the Italian-side pass.</div>
+<div class="card-foot">Prices pulled 25 Nov 2026 · flights for 4 passengers · re-check before booking</div></div>
+<div class="card"><div class="card-header"><div class="rank top3">2</div><div class="card-title-row">
+<div class="card-name">Kühtai — Ski Free</div><div class="card-region">Tirol, Austria · fly Munich</div><div class="card-shape">Mon 30 Nov → Fri 4 Dec · 4 nights · <b>≈4 ski days</b></div></div>
+<div class="card-score">≈€935<span>pp all-in</span></div></div><div class="img-strip"><img src="images/lastminute/alpinlodges-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-3.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpenrose-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpenrose-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpenrose-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="card-tagline">Lift pass included</div>
+<div class="metrics"><div class="m wide"><div class="k">Flights</div><div class="v conn"><b>Amsterdam → Munich</b> Mon 30 Nov 08:55–10:20 (€223) · <b>back</b> Fri 4 Dec 21:20–22:55 (€166) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTEtMzBqBRIDQU1TcgUSA01VQxoaEgoyMDI2LTEyLTA0agUSA01VQ3IFEgNBTVNCBAEBAQFIAZgBAQ%3D%3D&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a><br>Innsbruck would be closer but has no flights from NL before 6 Dec.</div></div>
+<div class="m wide hilite"><div class="k">Airport → slopes</div><div class="v conn"><b>Hire car needed</b> — Munich → Kühtai ≈2h. Public buses from Innsbruck to Kühtai are sparse and possibly not daily.</div></div>
+<div class="m wide"><div class="k">Where to stay — 4 people</div><div class="tbl-wrap"><table class="staytab"><thead><tr><th>Stay</th><th>What it is</th><th>Wellness</th><th class="num">Total</th><th class="num">pp</th></tr></thead><tbody><tr class=best><td><a href="https://www.booking.com/hotel/at/alpinresort-kuhtai.en-gb.html" target="_blank" rel="noopener">AlpinLodges Kühtai</a> <span class="sub">Booking</span></td><td>Chalet-style apartment · 2 bedrooms · rated 9.7 (236)</td><td>—</td><td class="num">€1,898</td><td class="num">€475</td></tr><tr><td><a href="https://www.booking.com/hotel/at/alpenrose-aktiv-amp-sport.en-gb.html" target="_blank" rel="noopener">Hotel Alpenrose aktiv &amp; sport</a> <span class="sub">Booking</span></td><td>Quadruple room · rated 8.9 (138)</td><td><b>Sauna, indoor pool, spa</b></td><td class="num">€1,858</td><td class="num">€465</td></tr><tr><td><a href="https://www.booking.com/hotel/at/konradin.en-gb.html" target="_blank" rel="noopener">Hotel Konradin</a> <span class="sub">Booking</span></td><td>Suite · rated 8.2 (33)</td><td><b>Sauna, hot tub, pool</b></td><td class="num">€2,466</td><td class="num">€617</td></tr></tbody></table></div></div>
+<div class="m wide costs"><div class="k">What it costs</div><table class="cost"><tbody><tr><td>Flights AMS ↔ Munich</td><td class="num">€389</td><td class="src">Google Flights, 4 pax</td></tr><tr><td>Hire car, 5 days</td><td class="num">≈€60–90</td><td class="src">estimate, not quoted</td></tr><tr><td>AlpinLodges, 4 nights</td><td class="num">€475</td><td class="src">Booking.com, live price</td></tr><tr><td>Lift pass</td><td class="num">€0</td><td class="src"><b>Ski Free</b> — included at participating stays</td></tr><tr class="tot"><td><b>Total per person (4 people)</b></td><td class="num"><b>≈€925–955</b></td><td class="src">excl. food, ski hire</td></tr></tbody></table></div></div>
+<div class="rchips"><a class="rchip" href="#r-kuehtai">Kühtai <b>49 km</b></a> <a class="rchip" href="#r-hochoetz">Hochoetz <b>37.5–41 km</b></a></div><div class="card-note">Kühtai's Ski Free offer includes the lift pass for stays of 3+ nights between 27 Nov and 18 Dec at participating properties (worth €251.50 for 4 days). <b>Confirm with the property that the pass is included in the rate you book</b> — booking direct is safest. Snow is the weak point next week: a thin natural base and no new snow until ~5 Dec.</div>
+<div class="card-foot">Prices pulled 25 Nov 2026 · flights for 4 passengers · re-check before booking</div></div>
+<div class="card"><div class="card-header"><div class="rank top3">3</div><div class="card-title-row">
+<div class="card-name">Tignes / Val d'Isère</div><div class="card-region">Savoie, France · fly Geneva</div><div class="card-shape">Mon 30 Nov → Fri 4 Dec · the best snow, the dearest flights</div></div>
+<div class="card-score">€530+<span>flights alone</span></div></div><div class="img-strip"></div><div class="card-tagline">Best snow in the Alps</div>
+<div class="metrics"><div class="m wide"><div class="k">Flights</div><div class="v conn">Amsterdam → Geneva Mon 30 Nov from €319 (21:20) to €472 (06:55) · back Fri 4 Dec €324 or Sat 5 Dec 07:10 €209 <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTEtMzBqBRIDQU1TcgUSA0dWQRoaEgoyMDI2LTEyLTA0agUSA0dWQXIFEgNBTVNCBAEBAQFIAZgBAQ%3D%3D&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a></div></div>
+<div class="m wide hilite"><div class="k">Airport → slopes</div><div class="v conn">Geneva → Tignes ≈2h45 by car or shared transfer; both resorts are car-free once you're there.</div></div>
+<div class="m wide"><div class="k">Where to stay — 4 people</div><p class='sub' style='margin-top:6px'>Plenty of cheap apartments (€26–34 pp/night for 4), but mostly studios — not worked out in detail because the flights make this the most expensive option.</p></div>
+<div class="m wide costs"><div class="k">What it costs</div><table class="cost"><tbody><tr><td>Flights AMS ↔ Geneva</td><td class="num">€530–800</td><td class="src">Google Flights, 4 pax</td></tr><tr><td>Lift pass Espace Killy, 4 days</td><td class="num">€312</td><td class="src">2026/27 tariff</td></tr><tr class="tot"><td><b>Total per person (4 people)</b></td><td class="num"><b>≈€1,050+</b></td><td class="src">excl. food, ski hire</td></tr></tbody></table></div></div>
+<div class="rchips"><a class="rchip" href="#r-killy">Tignes – Val d'Isère (Espace Killy) <b>≈300 km</b></a> <a class="rchip" href="#r-valthorens">Val Thorens / Les 3 Vallées <b>140–150 km (600 km 3V)</b></a></div><div class="card-note">If snow quality matters more than money: 1–1.2 m modelled base, glacier on the Grande Motte, and both resorts already open.</div>
+<div class="card-foot">Prices pulled 25 Nov 2026 · flights for 4 passengers · re-check before booking</div></div>
+<h2>Later windows</h2>
+<div class="card"><div class="card-header"><div class="rank top3">B</div><div class="card-title-row">
+<div class="card-name">Kühtai — Ski Free</div><div class="card-region">Tirol · fly Innsbruck</div><div class="card-shape">Sun 6 → Sat 12 Dec · 6 nights · <b>≈6 ski days</b></div></div>
+<div class="card-score">≈€950<span>pp all-in</span></div></div><div class="img-strip"><img src="images/lastminute/alpinlodges-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-3.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/jagdschloss-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/jagdschloss-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/jagdschloss-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="card-tagline">Fresh snow forecast + free pass</div>
+<div class="metrics"><div class="m wide"><div class="k">Flights</div><div class="v conn"><b>Eindhoven → Innsbruck</b> Sun 6 Dec 17:30–18:55 (€73) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMDZqBRIDRUlOcgUSA0lOTkIEAQEBAUgBmAEC&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a> · <b>back</b> Innsbruck → Amsterdam Sat 12 Dec 18:00–19:45 (€61) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMTJqBRIDSU5OcgUSA0FNU0IEAQEBAUgBmAEC&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a></div></div>
+<div class="m wide hilite"><div class="k">Airport → slopes</div><div class="v conn">Hire car ≈50 min from Innsbruck airport (estimate €50–75 pp). Back Saturday evening — in time for Eindhoven on Sunday.</div></div>
+<div class="m wide"><div class="k">Where to stay — 4 people</div><div class="tbl-wrap"><table class="staytab"><thead><tr><th>Stay</th><th>What it is</th><th>Wellness</th><th class="num">Total</th><th class="num">pp</th></tr></thead><tbody><tr class=best><td><a href="https://www.booking.com/hotel/at/alpinresort-kuhtai.en-gb.html" target="_blank" rel="noopener">AlpinLodges Kühtai</a> <span class="sub">Booking</span></td><td>Apartment “Ibex” · 2 bedrooms · 77 m² · 1 left</td><td>—</td><td class="num">€3,028</td><td class="num">€757</td></tr><tr><td><a href="https://www.booking.com/hotel/at/jagdschloss-kuhtai.en-gb.html" target="_blank" rel="noopener">Hotel Jagdschloss Resort</a> <span class="sub">Booking</span></td><td>Historic hunting lodge · 2 deluxe doubles · rated 9.0 (591)</td><td>Spa</td><td class="num">≈€3,518</td><td class="num">≈€880</td></tr></tbody></table></div></div>
+<div class="m wide costs"><div class="k">What it costs</div><table class="cost"><tbody><tr><td>Flights</td><td class="num">€134</td><td class="src">4 pax</td></tr><tr><td>Hire car</td><td class="num">≈€50–75</td><td class="src">estimate</td></tr><tr><td>AlpinLodges, 6 nights</td><td class="num">€757</td><td class="src">live price</td></tr><tr><td>Lift pass, 6 days</td><td class="num">€0</td><td class="src">Ski Free (normally €353)</td></tr><tr class="tot"><td><b>Total per person (4 people)</b></td><td class="num"><b>≈€940–965</b></td><td class="src">excl. food, ski hire</td></tr></tbody></table></div></div>
+<div class="rchips"><a class="rchip" href="#r-kuehtai">Kühtai <b>49 km</b></a> <a class="rchip" href="#r-hochoetz">Hochoetz <b>37.5–41 km</b></a></div><div class="card-note">Alpenrose, Konradin and Sonne &amp; Schnee are already sold out on Booking for these dates.</div>
+<div class="card-foot">Prices pulled 25 Nov 2026 · flights for 4 passengers · re-check before booking</div></div>
+<div class="card"><div class="card-header"><div class="rank top3">C</div><div class="card-title-row">
+<div class="card-name">Kühtai — Ski Free</div><div class="card-region">Tirol · fly Innsbruck</div><div class="card-shape">Mon 14 → Fri 18 Dec · 4 nights · <b>≈3.5 ski days</b></div></div>
+<div class="card-score">≈€790<span>pp all-in</span></div></div><div class="img-strip"><img src="images/lastminute/alpinlodges-1.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-2.jpg" alt="" loading="lazy" onerror="this.remove()"><img src="images/lastminute/alpinlodges-3.jpg" alt="" loading="lazy" onerror="this.remove()"></div><div class="card-tagline">Quietest week</div>
+<div class="metrics"><div class="m wide"><div class="k">Flights</div><div class="v conn"><b>Amsterdam → Innsbruck</b> Mon 14 Dec 15:50–17:30 (€122) · back Fri 18 Dec 14:30–16:15 (€85) <a class="gf" href="https://www.google.com/travel/flights?tfs=GhoSCjIwMjYtMTItMTRqBRIDQU1TcgUSA0lOThoaEgoyMDI2LTEyLTE4agUSA0lOTnIFEgNBTVNCBAEBAQFIAZgBAQ%3D%3D&amp;curr=EUR" target="_blank" rel="noopener">Google Flights ↗</a><br>A Sunday 13 Dec start isn't possible: the only Eindhoven flight leaves at 17:30.</div></div>
+<div class="m wide hilite"><div class="k">Airport → slopes</div><div class="v conn">Hire car ≈50 min from Innsbruck airport.</div></div>
+<div class="m wide"><div class="k">Where to stay — 4 people</div><div class="tbl-wrap"><table class="staytab"><thead><tr><th>Stay</th><th>What it is</th><th>Wellness</th><th class="num">Total</th><th class="num">pp</th></tr></thead><tbody><tr class=best><td><a href="https://www.booking.com/hotel/at/alpinresort-kuhtai.en-gb.html" target="_blank" rel="noopener">AlpinLodges Kühtai</a> <span class="sub">Booking</span></td><td>Apartment “Lynx” · 2 bedrooms · 73 m² · 1 left</td><td>—</td><td class="num">€2,079</td><td class="num">€520</td></tr><tr><td><a href="https://www.booking.com/hotel/at/jagdschloss-kuhtai.en-gb.html" target="_blank" rel="noopener">Hotel Jagdschloss Resort</a> <span class="sub">Booking</span></td><td>Duplex suite · 2 bedrooms</td><td>Spa</td><td class="num">≈€2,150</td><td class="num">≈€538</td></tr></tbody></table></div></div>
+<div class="m wide costs"><div class="k">What it costs</div><table class="cost"><tbody><tr><td>Flights</td><td class="num">€207</td><td class="src">4 pax</td></tr><tr><td>Hire car</td><td class="num">≈€40–60</td><td class="src">estimate</td></tr><tr><td>AlpinLodges, 4 nights</td><td class="num">€520</td><td class="src">live price</td></tr><tr><td>Lift pass, 4 days</td><td class="num">€0</td><td class="src">Ski Free</td></tr><tr class="tot"><td><b>Total per person (4 people)</b></td><td class="num"><b>≈€765–785</b></td><td class="src">excl. food, ski hire</td></tr></tbody></table></div></div>
+<div class="rchips"><a class="rchip" href="#r-kuehtai">Kühtai <b>49 km</b></a> <a class="rchip" href="#r-lesarcs">Les Arcs / Paradiski <b>200 km (425 km Paradiski)</b></a> <a class="rchip" href="#r-rosiere">La Rosière / Espace San Bernardo <b>160 km</b></a></div><div class="card-note">Window C alternative: Les Arcs and La Rosière open on 12 Dec with a reported ~3 m at altitude — Geneva flights €274–322 that week.</div>
+<div class="card-foot">Prices pulled 25 Nov 2026 · flights for 4 passengers · re-check before booking</div></div>
+<h2 id="areas">The ski areas</h2><div class="rgridwrap"><div class="rcard" id="r-kuehtai"><div class="rhead"><div><div class="rname">Kühtai</div><div class="rsub">Tirol · Ski Free pass included until 18 Dec</div></div><div class="rkm">49 km</div></div>
+<div class="bar"><span class="seg blue" style="width:21.3%"></span><span class="seg red" style="width:68.4%"></span><span class="seg black" style="width:10.3%"></span></div><div class="legend"><span><i class="blue"></i>10.5 km blue</span><span><i class="red"></i>33.7 km red</span><span><i class="black"></i>5.1 km black</span></div><div class="rextra">Sources differ: 47.3 km (schneehoehen) vs 49.3 km (skiresort)</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,938 – 2,520 m</div></div><div><div class="k">Snowmaking</div><div class="v">78% of pistes</div></div>
+<div><div class="k">Lifts</div><div class="v">12</div></div><div><div class="k">Season</div><div class="v">27 Nov 2026 – 11 Apr 2027</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Day €66.50 · 4-day €251.50 · 6-day €353 — <b>€0 with Ski Free</b></div></div></div>
+<div class="rnote">Highest base in Tirol; snow-sure for its altitude but only ~580 m vertical. Thin natural base right now; forecast +39 cm on 5–10 Dec.</div><a class="rlink" href="https://www.kuehtai.info/en/" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-hochoetz"><div class="rhead"><div><div class="rname">Hochoetz</div><div class="rsub">Ötztal · also on the Kühtai pass</div></div><div class="rkm">37.5–41 km</div></div>
+<div class="bar"><span class="seg blue" style="width:32.0%"></span><span class="seg red" style="width:57.3%"></span><span class="seg black" style="width:10.7%"></span></div><div class="legend"><span><i class="blue"></i>12 km blue</span><span><i class="red"></i>21.5 km red</span><span><i class="black"></i>4 km black</span></div><div class="rextra">Split per TUI (37.5 km); other sources give 41 km</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">up to 2,129 m</div></div><div><div class="k">Snowmaking</div><div class="v">100% of pistes</div></div>
+<div><div class="k">Lifts</div><div class="v">13–15</div></div><div><div class="k">Season</div><div class="v">4 Dec 2026 – 11 Apr 2027</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Pre-season (4–18 Dec): day €50.50 · 4-day €191.50</div></div></div>
+<div class="rnote">Low top station; full snowmaking but early season means a thin man-made base. A side trip from Kühtai, not a reason to go.</div><a class="rlink" href="https://www.oetztal.com/en/activities/winter/skiing-snowboarding/hochoetz-ski-area" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-cervinia"><div class="rhead"><div><div class="rname">Breuil-Cervinia / Valtournenche</div><div class="rsub">Aosta Valley · Italian side</div></div><div class="rkm">≈104–160 km<span class="tag good">Glacier</span></div></div>
+<div class="bar np"></div><div class="legend"><span>blue / red / black split not reliably published</span></div><div class="rextra">Colour split for the Italian side alone not published</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,524 – 3,884 m</div></div><div><div class="k">Snowmaking</div><div class="v">≈70% of pistes</div></div>
+<div><div class="k">Lifts</div><div class="v">≈20</div></div><div><div class="k">Season</div><div class="v">24 Oct 2026 – 2 May 2027 · Valtournenche sector from 28 Nov</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Day €64 · 4-day €235.50 · 6-day €338 · 30% off 4–7 days at partner stays</div></div></div>
+<div class="rnote">Glacier skiing above 3,000 m and the deepest base reachable on cheap flights. South-facing, so sunny and soft in the afternoon. 26/39 slopes open on 25 Nov.</div><a class="rlink" href="https://www.cervinia.it" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-matterhorn"><div class="rhead"><div><div class="rname">Matterhorn Ski Paradise (with Zermatt)</div><div class="rsub">Italy + Switzerland</div></div><div class="rkm">322 km<span class="tag good">Glacier</span></div></div>
+<div class="bar"><span class="seg blue" style="width:23.3%"></span><span class="seg red" style="width:68.3%"></span><span class="seg black" style="width:8.4%"></span></div><div class="legend"><span><i class="blue"></i>75 km blue</span><span><i class="red"></i>220 km red</span><span><i class="black"></i>27 km black</span></div><div class="rextra">+ ≈38 km ski routes (360 km if counted)</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,562 – 3,899 m</div></div><div><div class="k">Snowmaking</div><div class="v">≈70% of pistes</div></div>
+<div><div class="k">Lifts</div><div class="v">51–54</div></div><div><div class="k">Season</div><div class="v">Zermatt side weekends from 28 Nov, daily from 19 Dec</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">International pass: day CHF 104 · 4-day CHF 301 · 6-day CHF 432</div></div></div>
+<div class="rnote"><b>The Cervinia–Zermatt link was closed on 25 Nov</b> (0 of 5 connections). Don't buy the international pass for next week.</div><a class="rlink" href="https://www.matterhornparadise.ch" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-killy"><div class="rhead"><div><div class="rname">Tignes – Val d'Isère (Espace Killy)</div><div class="rsub">Savoie · France</div></div><div class="rkm">≈300 km<span class="tag good">Glacier</span></div></div>
+<div class="bar np"></div><div class="legend"><span>blue / red / black split not reliably published</span></div><div class="rextra">Published colour splits are inconsistent</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,550 – 3,456 m</div></div><div><div class="k">Snowmaking</div><div class="v">Tignes 53% · Val d'Isère 22%</div></div>
+<div><div class="k">Lifts</div><div class="v">≈80</div></div><div><div class="k">Season</div><div class="v">Tignes from 21 Nov · Val d'Isère from 28 Nov</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Day €78 · 4-day €312 · 6-day €468</div></div></div>
+<div class="rnote">Deepest base in the Alps right now (modelled 1.0–1.2 m mid-mountain) plus the Grande Motte glacier. The only catch is Geneva flights.</div><a class="rlink" href="https://www.tignes.net" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-valthorens"><div class="rhead"><div><div class="rname">Val Thorens / Les 3 Vallées</div><div class="rsub">Savoie · France</div></div><div class="rkm">140–150 km (600 km 3V)<span class="tag good">Glacier</span></div></div>
+<div class="bar np"></div><div class="legend"><span>blue / red / black split not reliably published</span></div><div class="rextra">Val Thorens split published inconsistently</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">2,080 – 3,224 m</div></div><div><div class="k">Snowmaking</div><div class="v">not published</div></div>
+<div><div class="k">Lifts</div><div class="v">30 (VT)</div></div><div><div class="k">Season</div><div class="v">Open since 21 Nov · 3 Vallées link from 5 Dec</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">VT day €73.50 · 4-day €294 · 3V early-season day €66.10 to 18 Dec</div></div></div>
+<div class="rnote">Europe's highest resort — the most reliable December snow in France.</div><a class="rlink" href="https://www.valthorens.com" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-lesarcs"><div class="rhead"><div><div class="rname">Les Arcs / Paradiski</div><div class="rsub">Savoie · France</div></div><div class="rkm">200 km (425 km Paradiski)</div></div>
+<div class="bar"><span class="seg blue" style="width:51.0%"></span><span class="seg red" style="width:30.0%"></span><span class="seg black" style="width:19.0%"></span></div><div class="legend"><span><i class="blue"></i>102 km blue</span><span><i class="red"></i>60 km red</span><span><i class="black"></i>38 km black</span></div><div class="rextra">Split is easy/intermediate/difficult; no separate green</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,627 – 3,226 m</div></div><div><div class="k">Snowmaking</div><div class="v">34% of pistes</div></div>
+<div><div class="k">Lifts</div><div class="v">52</div></div><div><div class="k">Season</div><div class="v">Opens 12 Dec 2026</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Day €71 · 4-day €264 · 6-day €368</div></div></div>
+<div class="rnote">Reported ~3 m at altitude after November storms — but closed until 12 Dec. Window C only.</div><a class="rlink" href="https://www.lesarcs.com" target="_blank" rel="noopener">Official site &rarr;</a></div><div class="rcard" id="r-rosiere"><div class="rhead"><div><div class="rname">La Rosière / Espace San Bernardo</div><div class="rsub">Savoie + Aosta (La Thuile)</div></div><div class="rkm">160 km</div></div>
+<div class="bar np"></div><div class="legend"><span>blue / red / black split not reliably published</span></div><div class="rextra">Colour split by km not published</div>
+<div class="rgrid"><div><div class="k">Altitude</div><div class="v">1,194 – 2,800 m</div></div><div><div class="k">Snowmaking</div><div class="v">not published</div></div>
+<div><div class="k">Lifts</div><div class="v">34</div></div><div><div class="k">Season</div><div class="v">Opens 12 Dec 2026</div></div></div>
+<div class="rgrid" style="grid-template-columns:1fr"><div><div class="k">Lift pass 2026/27 (adult)</div><div class="v">Espace San Bernardo day €61 · 4-day €231 · 6-day €322</div></div></div>
+<div class="rnote">Big early snow but lowest of the French options and closed until 12 Dec.</div><a class="rlink" href="https://www.larosiere.net" target="_blank" rel="noopener">Official site &rarr;</a></div></div>
+<h2>Before booking</h2>
+<div class="note"><strong>Several stays show “1 left”.</strong> Prices move daily this close to departure; re-check each one at the moment of booking.</div>
+<div class="note"><strong>Kühtai's free pass depends on where you book.</strong> The offer is tied to participating properties; confirm the rate includes it.</div>
+<div class="note"><strong>Hire cars are estimates.</strong> Winter tyres are standard on Austrian and Italian rentals in December, but check the rental includes chains for the Cervinia road.</div>
+<footer><p>Flights: Google Flights nonstop fares searched for 4 passengers on 25 Nov 2026 (links open the same search).
+Accommodation: live Booking.com and Airbnb prices for 4 adults on the stated dates; sauna / hot tub checked against each listing's own facilities
+section. Snow: Open-Meteo modelled snow depth (ICON and ECMWF) and a 16-day forecast at mid-mountain elevation — models ignore snowmaking and
+grooming, and anything beyond ~7 days is a signal, not a forecast. Ski-area statistics: schneehoehen.de, skiresort.com and operator sites;
+where sources disagree the range is shown. Hire cars are estimates, not quotes. Nothing has been booked.</p></footer></main>
+</body>
+</html>
